@@ -11,6 +11,7 @@ namespace ShippingHelper.Core.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
+		public bool IsDisabled { get; set; } = false;
 		public virtual ICollection<Offers> Offers { get; set; } = new List<Offers>();
 		public virtual ICollection<AcceptOffers> AcceptOffers { get; set; } = new List<AcceptOffers>();
 	}

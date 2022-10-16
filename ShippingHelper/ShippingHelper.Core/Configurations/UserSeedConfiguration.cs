@@ -15,6 +15,8 @@ namespace ShippingHelper.Core.Configurations
 		{
 			var hasher = new PasswordHasher<Users>();
 
+			builder.Property(it => it.IsDisabled).HasDefaultValue(false);
+
 			builder.HasData(
 				new Users
 				{
