@@ -1,15 +1,17 @@
 using ShippingHelper.Core.Data;
+using ShippingHelper.Core.IRepository;
+using ShippingHelper.Core.Repository;
 
 namespace ShippingHelper.Core.Infrastructure
 {
 	public class UnitOfWork : IUnitOfWork
 	{
 		private readonly AppDbContext _context;
-		//private ICategoriesRepository _categoriesRepository;
-		//private IPostsRepository _postRepository;
-		//private IPostTagRepository _postTagRepository;
-		//private ICommentsRepository _commentRepository;
-		//private ITagsRepository _tagsRepository;
+		private IAcceptOffersRepository _acceptOffersRepository;
+		private IContactsRepository _contactsRepository;
+		private IOffersRepository _offersRepository;
+		private IProductOffersRepository _productOffersRepository;
+		private IUsersRepository _usersRepository;
 
 		public UnitOfWork(AppDbContext context)
 		{
@@ -18,15 +20,15 @@ namespace ShippingHelper.Core.Infrastructure
 
 		public AppDbContext AppDbContext => _context;
 
-		//public ICategoriesRepository CategoriesRepository => _categoriesRepository ?? (_categoriesRepository = new CategoriesRepository(_context));
+		public IAcceptOffersRepository AcceptOffersRepository => _acceptOffersRepository ?? (_acceptOffersRepository = new AcceptOffersRepository(_context));
 
-		//public IPostsRepository PostsRepository => _postRepository ?? (_postRepository = new PostsRepository(_context));
+		public IContactsRepository ContactsRepository => _contactsRepository ?? (_contactsRepository = new ContactsRepository(_context));
 
-		//public IPostTagRepository PostTagRepository => _postTagRepository ?? (_postTagRepository = new PostTagRepository(_context));
+		public IOffersRepository OffersRepository => _offersRepository ?? (_offersRepository = new OffersRepository(_context));
 
-		//public ICommentsRepository CommentsRepository => _commentRepository ?? (_commentRepository = new CommentsRepository(_context));
+		public IProductOffersRepository ProductOffersRepository => _productOffersRepository ?? (_productOffersRepository = new ProductOffersRepository(_context));
 
-		//public ITagsRepository TagsRepository => _tagsRepository ?? (_tagsRepository = new TagsRepository(_context));
+		public IUsersRepository UsersRepository => _usersRepository ?? (_usersRepository = new UsersRepository(_context));
 
 		public void Dispose()
 		{
