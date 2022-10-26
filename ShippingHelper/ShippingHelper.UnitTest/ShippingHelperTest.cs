@@ -1,6 +1,8 @@
+using Moq;
+
 namespace ShippingHelper.UnitTest
 {
-	public class Tests
+	public class ShippingHelperTest
 	{
 		[SetUp]
 		public void Setup()
