@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShippingHelper.Core.Models;
 using ShippingHelper.Models;
+using ShippingHelper.Services.ContactsUs;
 using System.Diagnostics;
 
 namespace ShippingHelper.Controllers
@@ -7,11 +9,13 @@ namespace ShippingHelper.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+        private readonly IContactServices _services;
 
-		public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IContactServices services)
 		{
 			_logger = logger;
-		}
+            this._services = services;
+        }
 
 		public IActionResult Index()
 		{
@@ -22,6 +26,19 @@ namespace ShippingHelper.Controllers
         {
             return View();
         }
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> ContactUs([Bind("FullName, Email, Subjects, Message")] Contacts contacts)
+		{
+			if(ModelState.IsValid)
+			{
+				await _services.SendMessage(contacts);
+				TempData["Message"] = "Thank you! Your message has been sent! We'll reach out to you soon.";
+				return View();
+			}
+			return View(contacts);
+		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

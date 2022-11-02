@@ -9,6 +9,6 @@ namespace ShippingHelper.Core.IRepository
 {
     public interface IContactsRepository : IBaseRepository<Contacts>
     {
-        
+        Task<IEnumerable<Contacts>> GetAllMessages();
     }
 }

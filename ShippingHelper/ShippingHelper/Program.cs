@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.Core.Models;
+using ShippingHelper.Services.ContactsUs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddDefaultIdentity<Users>(options => options.SignIn.RequireConf
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IContactServices, ContactServices>();
+
 
 builder.Services.AddControllersWithViews();
 
