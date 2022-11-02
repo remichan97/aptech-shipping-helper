@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShippingHelper.Core.Data;
+using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<Users>(options => options.SignIn.RequireConfirmedAccount = true)
 	.AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

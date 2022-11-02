@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ShippingHelper.Core.Data;
-using ShippingHelper.Core.Infrastructure;
 using ShippingHelper.Core.IRepository;
 using ShippingHelper.Core.Models;
+using ShippingHelper.Repository.Infrastructure;
 
 namespace ShippingHelper.Core.Repository
 {
-	public class AcceptOffersRepository : BaseRepository<AcceptOffers>, IAcceptOffersRepository
+    public class OffersRepository : BaseRepository<Offers>, IOffersRepository
 	{
-		public AcceptOffersRepository(AppDbContext context) : base(context)
+		public OffersRepository(AppDbContext context) : base(context)
 		{
 		}
 	}

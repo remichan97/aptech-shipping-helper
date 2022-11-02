@@ -2,7 +2,7 @@ using ShippingHelper.Core.Data;
 using ShippingHelper.Core.IRepository;
 using ShippingHelper.Core.Repository;
 
-namespace ShippingHelper.Core.Infrastructure
+namespace ShippingHelper.Repository.Infrastructure
 {
 	public class UnitOfWork : IUnitOfWork
 	{

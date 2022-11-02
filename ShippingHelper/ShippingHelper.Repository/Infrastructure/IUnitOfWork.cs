@@ -1,7 +1,7 @@
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.IRepository;
 
-namespace ShippingHelper.Core.Infrastructure;
+namespace ShippingHelper.Repository.Infrastructure;
 
 public interface IUnitOfWork : IDisposable
 {
