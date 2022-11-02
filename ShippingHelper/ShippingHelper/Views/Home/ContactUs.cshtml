@@ -1,0 +1,89 @@
+﻿@model ShippingHelper.Core.Models.Contacts
+
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<!-- Contact Start -->
+<div class="container-fluid overflow-hidden py-5 px-lg-0">
+    <div class="container contact-page py-5 px-lg-0">
+        <div class="row g-5 mx-lg-0">
+            <div class="col-md-6 contact-form wow fadeIn" data-wow-delay="0.1s">
+                <h6 class="text-secondary text-uppercase">Get In Touch</h6>
+                <h1 class="mb-4">Contact For Any Query</h1>
+                <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done</p>
+                <div class="bg-light p-4">
+                    <form asp-action="ContactUs">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="FullName" class="form-control" id="name" placeholder="Your Name">
+                                    <label for="name">Your Name</label>
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Your Email">
+                                    <label for="email">Your Email</label>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" asp-for="Subjects" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Subject</label>
+                                    <span asp-validation-for="Subjects" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" asp-for="Message" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                    <label for="message">Message</label>
+                                    <span asp-validation-for="Message" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+@*<h4>Contacts</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ContactUs">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send MEssage" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
