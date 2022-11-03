@@ -13,9 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingHelper.ViewModels",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingHelper.Common", "ShippingHelper.Common\ShippingHelper.Common.csproj", "{FDFBD8CC-60FE-4102-A725-6A32934E6E59}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingHelper.UnitTest", "ShippingHelper.UnitTest\ShippingHelper.UnitTest.csproj", "{211C9F3A-E90B-4DBE-9F99-3EB65C9F611E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingHelper.Repository", "ShippingHelper.Repository\ShippingHelper.Repository.csproj", "{A511091A-E805-4689-8B1F-C67E222994AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingHelper.Repository", "ShippingHelper.Repository\ShippingHelper.Repository.csproj", "{A511091A-E805-4689-8B1F-C67E222994AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +41,6 @@ Global
 		{FDFBD8CC-60FE-4102-A725-6A32934E6E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDFBD8CC-60FE-4102-A725-6A32934E6E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDFBD8CC-60FE-4102-A725-6A32934E6E59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{211C9F3A-E90B-4DBE-9F99-3EB65C9F611E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{211C9F3A-E90B-4DBE-9F99-3EB65C9F611E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{211C9F3A-E90B-4DBE-9F99-3EB65C9F611E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{211C9F3A-E90B-4DBE-9F99-3EB65C9F611E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A511091A-E805-4689-8B1F-C67E222994AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A511091A-E805-4689-8B1F-C67E222994AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A511091A-E805-4689-8B1F-C67E222994AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
