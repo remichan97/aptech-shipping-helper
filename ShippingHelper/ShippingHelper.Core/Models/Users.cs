@@ -18,6 +18,5 @@ namespace ShippingHelper.Core.Models
         [ForeignKey("Cities")]
         public int CityId { get; set; }
         public virtual Cities Cities { get; set; }
-
 	}
 }

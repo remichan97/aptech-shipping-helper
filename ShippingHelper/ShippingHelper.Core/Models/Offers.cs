@@ -18,7 +18,6 @@ namespace ShippingHelper.Core.Models
 	public class Offers
 	{
 		public Guid Id { get; set; } = Guid.NewGuid();
-
 		public string StartAddress { get; set; }
 		public string EndAddress { get; set; }
 		public string Note { get; set; }
