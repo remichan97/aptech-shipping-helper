@@ -23,6 +23,7 @@ namespace ShippingHelper.Core.Data
 		public DbSet<ProductOffers> ProductOffers { get; set; }
 		public DbSet<AcceptOffers> AcceptOffers { get; set; }
 		public DbSet<Cities> Cities { get; set; }
+		public DbSet<ReportedMerchant> ReportedMerchants { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
