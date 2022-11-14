@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace ShippingHelper.Core.Models
         public string Description { get; set; }
         public int Quantity { get; set; }
         public string Image { get; set; }
-        public virtual Offers Offers { get; set; }
+        [ForeignKey("Offers")]
+        public Guid OfferId { get; set; }
+		public virtual Offers Offers { get; set; }
 	}
 }

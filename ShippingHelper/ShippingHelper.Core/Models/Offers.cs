@@ -22,12 +22,11 @@ namespace ShippingHelper.Core.Models
 		public string EndAddress { get; set; }
 		public string Note { get; set; }
 		public double Price { get; set; }
+		public DateTime PostedDate { get; set; } = DateTime.Now;
 		public OfferStatus Status { get; set; } = OfferStatus.Open;
 		[ForeignKey("Users")]
 		public string UserId { get; set; }
 		public virtual Users Users { get; set; }
-		[ForeignKey("ProductOffers")]
-		public Guid ProductOfferId { get; set; }
-		public virtual ProductOffers ProductOffers { get; set; }
+		public virtual ICollection<ProductOffers> ProductOffers { get; set; } = new List<ProductOffers>();
 	}
 }
