@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ShippingHelper.Common.Constants;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
 
 namespace ShippingHelper.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Roles.Administrator)]
     public class ContactsController : Controller
     {
         private readonly AppDbContext _context;
