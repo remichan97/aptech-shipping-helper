@@ -19,7 +19,12 @@ namespace ShippingHelper.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+            if (User.Identity.IsAuthenticated)
+            {
+				return RedirectToAction("Index", "RedirectUser", new {area = "default"});
+            }
+
+            return View();
 		}
 
         public IActionResult ContactUs()

@@ -28,7 +28,7 @@ namespace ShippingHelper.Core.Configurations
 					UserName = "admin@shiplink.com",
 					NormalizedUserName = "ADMIN@SHIPLINK.COM",
 					Address = "Admin",
-					PasswordHash = hasher.HashPassword(null, "remichan97"),
+					PasswordHash = hasher.HashPassword(null, "remich@n97"),
 					CityId = 1
 		        },
 				new Users
@@ -41,7 +41,7 @@ namespace ShippingHelper.Core.Configurations
 					UserName = "shipper@shiplink.com",
 					NormalizedUserName = "SHIPPER@SHIPLINK.COM",
 					Address = "Shipping",
-					PasswordHash = hasher.HashPassword(null, "remichan97"),
+					PasswordHash = hasher.HashPassword(null, "remich@n97"),
 					CityId = 2
 		        },
 				new Users
@@ -54,7 +54,7 @@ namespace ShippingHelper.Core.Configurations
 					Address = "Shop Address",
 					UserName = "shop@shiplink.com",
 					NormalizedUserName = "SHOP@SHIPLINK.COM",
-					PasswordHash = hasher.HashPassword(null, "remichan97"),
+					PasswordHash = hasher.HashPassword(null, "remich@n97"),
 					CityId = 2
 		        }
 			);
