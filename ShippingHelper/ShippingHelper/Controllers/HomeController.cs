@@ -19,7 +19,7 @@ namespace ShippingHelper.Controllers
 
 		public IActionResult Index()
 		{
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity!.IsAuthenticated)
             {
 				return RedirectToAction("Index", "RedirectUser", new {area = "default"});
             }

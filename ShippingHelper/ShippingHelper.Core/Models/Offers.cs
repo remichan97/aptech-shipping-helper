@@ -27,6 +27,9 @@ namespace ShippingHelper.Core.Models
 		[ForeignKey("Users")]
 		public string UserId { get; set; }
 		public virtual Users Users { get; set; }
+		[ForeignKey("Cities")]
+		public int CityId { get; set; }
+		public virtual Cities Cities { get; set; }
 		public virtual ICollection<ProductOffers> ProductOffers { get; set; } = new List<ProductOffers>();
 	}
 }

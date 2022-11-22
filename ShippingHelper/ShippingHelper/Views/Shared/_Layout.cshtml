@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Logistica - Shipping Company Website Template</title>
+    <title>ShipLink</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -58,6 +58,10 @@
                 @if(!signInManager.IsSignedIn(User))
                 {
                     <a asp-area="Identity" asp-page="/Account/Login" class="nav-item nav-link">Sign In/Join Us</a>
+                }
+                else
+                {
+                    <a asp-area="default" asp-page="/RedirectUser" class="nav-item nav-link">Back to Profile</a>
                 }
             </div>
             <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+012 345 6789</h4>

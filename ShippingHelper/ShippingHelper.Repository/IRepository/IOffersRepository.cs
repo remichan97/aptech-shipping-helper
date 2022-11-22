@@ -9,6 +9,9 @@ namespace ShippingHelper.Core.IRepository
 {
     public interface IOffersRepository : IBaseRepository<Offers>
     {
-        
+        Task<IEnumerable<Offers>> GetAllAsync();
+        Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId);
+        Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId);
+        Task AcceptOffer(Guid id, string userId);
     }
 }
