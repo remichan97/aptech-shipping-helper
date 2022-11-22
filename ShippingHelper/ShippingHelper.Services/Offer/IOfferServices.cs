@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShippingHelper.Services.Offer
 {
-    public interface IOfferService
+    public interface IOfferServices
     {
         Task<IEnumerable<Offers>> GetAllOffers();
         Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId);

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ShippingHelper.Services.Offer
 {
-    public class OfferService : IOfferService
+    public class OfferServices : IOfferServices
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public OfferService(IUnitOfWork unitOfWork)
+        public OfferServices(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }

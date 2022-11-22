@@ -4,6 +4,8 @@ using ShippingHelper.Core.Data;
 using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.Core.Models;
 using ShippingHelper.Services.ContactsUs;
+using ShippingHelper.Services.Offer;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IContactServices, ContactServices>();
+builder.Services.AddScoped<IOfferServices, OfferServices>();
 
 
 builder.Services.AddControllersWithViews();
