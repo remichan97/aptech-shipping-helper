@@ -26,12 +26,12 @@ namespace ShippingHelper.Core.Repository
 
         public async Task<IEnumerable<Offers>> GetAllAsync()
         {
-            return await _DbContext.Offers.ToListAsync();
+            return await _DbContext.Offers.Include(it => it.Users).ToListAsync();
         }
 
         public async Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId)
         {
-            return await _DbContext.Offers.Where(it => it.CityId ==  cityId).ToListAsync();
+            return await _DbContext.Offers.Include(it => it.Users).Where(it => it.CityId ==  cityId).ToListAsync();
         }
 
         public async Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId)

@@ -1,4 +1,5 @@
 ﻿using ShippingHelper.Core.Models;
+using ShippingHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace ShippingHelper.Services.Offer
         Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId);
         Task<IEnumerable<Offers>> GetOffersByCity(int cityId);
         Task<Offers> GetOffers(Guid id);
-        void Add(Offers offers);
-        void Update(Offers offers);
+        void Add(ShippingOfferForm form);
+        void Update(ShippingOfferForm form);
         void Delete(Guid id);
         void AcceptOffer(Guid id, string userId);
 

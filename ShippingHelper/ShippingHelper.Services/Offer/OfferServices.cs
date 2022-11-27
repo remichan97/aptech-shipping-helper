@@ -1,5 +1,6 @@
 ﻿using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
+using ShippingHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,16 @@ namespace ShippingHelper.Services.Offer
             await _unitOfWork.SaveChanges();
         }
 
-        public async void Add(Offers offers)
+        public async void Add(ShippingOfferForm form)
         {
+            Offers offers = new Offers
+            {
+                StartAddress = form.StartAddress,
+                EndAddress = form.EndAddress,
+                Price = form.Price,
+                Note = form.Note
+            };
+
             await _unitOfWork.OffersRepository.Add(offers);
             await _unitOfWork.SaveChanges();
         }
@@ -54,8 +63,16 @@ namespace ShippingHelper.Services.Offer
             return await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
         }
 
-        public async void Update(Offers offers)
+        public async void Update(ShippingOfferForm form)
         {
+            Offers offers = new Offers
+            {
+                StartAddress = form.StartAddress,
+                EndAddress = form.EndAddress,
+                Price = form.Price,
+                Note = form.Note
+            };
+
             _unitOfWork.OffersRepository.Update(offers);
             await _unitOfWork.SaveChanges();
         }

@@ -3,43 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ShippingHelper.Common.Constants;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
+using ShippingHelper.Services.Offer;
+using ShippingHelper.ViewModels;
 
 namespace ShippingHelper.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize]
+    [Authorize(Roles = Roles.Shipper + "," + Roles.User)]
     public class OffersController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IOfferServices _services;
+        private readonly UserManager<Users> _userManager;
 
-        public OffersController(AppDbContext context)
+        public OffersController(AppDbContext context, IOfferServices services, UserManager<Users> userManager)
         {
             _context = context;
+            this._services = services;
+            this._userManager = userManager;
         }
 
         // GET: User/Offers
+        [Authorize(Roles = Roles.Shipper)]
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Offers.Include(o => o.Users);
-            return View(await appDbContext.ToListAsync());
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var cityId = user.CityId;
+
+            var data = _services.GetOffersByCity(cityId);
+
+            return View(data);
+        }
+
+        [Authorize(Roles = Roles.User)]
+        public async Task<IActionResult> UserPosted()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var userId = user.Id;
+
+            var data = _services.GetOffersCreatedByUser(userId);
+            return View(data);
         }
 
         // GET: User/Offers/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Offers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var offers = await _context.Offers
-                .Include(o => o.Users)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var offers = await _services.GetOffers(id.Value);
             if (offers == null)
             {
                 return NotFound();
@@ -49,9 +72,9 @@ namespace ShippingHelper.Areas.User.Controllers
         }
 
         // GET: User/Offers/Create
+        [Authorize(Roles = Roles.User)]
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<Users>(), "Id", "Id");
             return View();
         }
 
@@ -60,34 +83,48 @@ namespace ShippingHelper.Areas.User.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartAddress,EndAddress,Note,Price,PostedDate,Status,UserId")] Offers offers)
+        [Authorize(Roles = Roles.User)]
+        public async Task<IActionResult> Create([Bind("StartAddress,EndAddress,Note,Price")] ShippingOfferForm form)
         {
             if (ModelState.IsValid)
             {
-                offers.Id = Guid.NewGuid();
-                _context.Add(offers);
-                await _context.SaveChangesAsync();
+                _services.Add(form);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<Users>(), "Id", "Id", offers.UserId);
-            return View(offers);
+            return View(form);
         }
 
         // GET: User/Offers/Edit/5
+        [Authorize(Roles = Roles.User)]
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null || _context.Offers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var offers = await _context.Offers.FindAsync(id);
+            var offers = await _services.GetOffers(id.Value);
             if (offers == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Set<Users>(), "Id", "Id", offers.UserId);
+            ViewBag["id"] = offers.Id;
             return View(offers);
+        }
+
+        [Authorize(Roles = Roles.Shipper)]
+        public async Task<IActionResult> AcceptOffer(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            _services.AcceptOffer(id.Value, user.Id);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // POST: User/Offers/Edit/5
@@ -95,78 +132,52 @@ namespace ShippingHelper.Areas.User.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,StartAddress,EndAddress,Note,Price,PostedDate,Status,UserId")] Offers offers)
+        [Authorize(Roles = Roles.User)]
+        public async Task<IActionResult> Edit(Guid id, [Bind("StartAddress,EndAddress,Note,Price")] ShippingOfferForm form)
         {
-            if (id != offers.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(offers);
-                    await _context.SaveChangesAsync();
+                    _services.Update(form);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (InvalidOperationException)
                 {
-                    if (!OffersExists(offers.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<Users>(), "Id", "Id", offers.UserId);
-            return View(offers);
+            ViewBag["id"] = id;
+            return View(form);
         }
 
         // GET: User/Offers/Delete/5
+        [Authorize(Roles = Roles.User)]
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Offers == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var offers = await _context.Offers
-                .Include(o => o.Users)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (offers == null)
+            var data = await _services.GetOffers(id.Value);
+
+            if (data == null)
             {
                 return NotFound();
             }
 
-            return View(offers);
+            return View(data);
         }
 
         // POST: User/Offers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.User)]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Offers == null)
-            {
-                return Problem("Entity set 'AppDbContext.Offers'  is null.");
-            }
-            var offers = await _context.Offers.FindAsync(id);
-            if (offers != null)
-            {
-                _context.Offers.Remove(offers);
-            }
-            
-            await _context.SaveChangesAsync();
+            _services.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool OffersExists(Guid id)
-        {
-          return _context.Offers.Any(e => e.Id == id);
         }
     }
 }
