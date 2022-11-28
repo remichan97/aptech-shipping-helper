@@ -10,7 +10,8 @@ public interface IUnitOfWork : IDisposable
 	public IOffersRepository OffersRepository { get; }
 	public IProductOffersRepository ProductOffersRepository { get; }
 	public IUsersRepository UsersRepository { get; }
-	public AppDbContext AppDbContext { get; }
+	public IReportMerchantsRepository ReportMerchantsRepository { get; }
+    public AppDbContext AppDbContext { get; }
 
 	Task<int> SaveChanges();
 }
