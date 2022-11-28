@@ -22,5 +22,10 @@ namespace ShippingHelper.Services.Reports
             await _unitOfWork.ReportMerchantsRepository.Add(reported);
             await _unitOfWork.SaveChanges();
         }
+
+        public async Task<IEnumerable<ReportedMerchant>> GetAll()
+        {
+            return await _unitOfWork.ReportMerchantsRepository.GetAllReports();
+        }
     }
 }

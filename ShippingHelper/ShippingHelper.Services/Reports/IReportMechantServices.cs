@@ -9,6 +9,7 @@ namespace ShippingHelper.Services.Reports
 {
     public interface IReportMechantServices
     {
+        Task<IEnumerable<ReportedMerchant>> GetAll();
         Task Add(ReportedMerchant reported);
     }
 }
