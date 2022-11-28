@@ -10,5 +10,6 @@ namespace ShippingHelper.Repository.IRepository
 {
     public interface IReportMerchantsRepository : IBaseRepository<ReportedMerchant>
     {
+        Task<IEnumerable<ReportedMerchant>> GetAllReports();
     }
 }

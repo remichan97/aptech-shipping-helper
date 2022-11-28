@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
 
-namespace ShippingHelper.Core.IRepository
+namespace ShippingHelper.Repository.IRepository
 {
     public interface IUsersRepository : IBaseRepository<Users>
     {

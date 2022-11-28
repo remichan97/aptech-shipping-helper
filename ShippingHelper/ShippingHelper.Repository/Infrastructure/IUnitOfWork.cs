@@ -1,5 +1,5 @@
 using ShippingHelper.Core.Data;
-using ShippingHelper.Core.IRepository;
+using ShippingHelper.Repository.IRepository;
 
 namespace ShippingHelper.Repository.Infrastructure;
 

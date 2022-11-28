@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShippingHelper.Core.Data;
-using ShippingHelper.Core.IRepository;
+using ShippingHelper.Repository.IRepository;
 using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
 
-namespace ShippingHelper.Core.Repository
+namespace ShippingHelper.Repository.Repository
 {
     public class OffersRepository : BaseRepository<Offers>, IOffersRepository
 	{

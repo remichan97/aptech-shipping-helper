@@ -1,4 +1,5 @@
-﻿using ShippingHelper.Core.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.Repository.IRepository;
@@ -14,6 +15,11 @@ namespace ShippingHelper.Repository.Repository
     {
         public ReportedMerchantsRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<IEnumerable<ReportedMerchant>> GetAllReports()
+        {
+            return await _DbContext.ReportedMerchants.ToListAsync();
         }
     }
 }
