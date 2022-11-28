@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
+using ShippingHelper.Services.Reports;
 
 namespace ShippingHelper.Areas.User.Controllers
 {
@@ -15,11 +16,11 @@ namespace ShippingHelper.Areas.User.Controllers
     [Authorize]
     public class ReportedMerchantsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IReportMechantServices _services;
 
-        public ReportedMerchantsController(AppDbContext context)
+        public ReportedMerchantsController(IReportMechantServices services)
         {
-            _context = context;
+            this._services = services;
         }
 
         // POST: User/ReportedMerchants/Create
@@ -31,12 +32,9 @@ namespace ShippingHelper.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
-                reportedMerchant.Id = Guid.NewGuid();
-                _context.Add(reportedMerchant);
-                await _context.SaveChangesAsync();
+                await _services.Add(reportedMerchant);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<Users>(), "Id", "Id", reportedMerchant.UserId);
             return View(reportedMerchant);
         }
     }
