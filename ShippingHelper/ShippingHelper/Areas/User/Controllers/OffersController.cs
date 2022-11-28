@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ShippingHelper.Common.Constants;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
@@ -124,7 +118,6 @@ namespace ShippingHelper.Areas.User.Controllers
 
             _services.AcceptOffer(id.Value, user.Id);
             return RedirectToAction(nameof(Index));
-
         }
 
         // POST: User/Offers/Edit/5
@@ -143,7 +136,6 @@ namespace ShippingHelper.Areas.User.Controllers
                 }
                 catch (InvalidOperationException)
                 {
-
                 }
                 return RedirectToAction(nameof(Index));
             }
