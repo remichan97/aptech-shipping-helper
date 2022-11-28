@@ -12,15 +12,9 @@ namespace ShippingHelper.Services.ContactsUs
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ContactServices(IUnitOfWork unitOfWork) 
-        {
-            this._unitOfWork = unitOfWork;
-        }
+        public ContactServices(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
 
-        public async Task<IEnumerable<Contacts>> GetAllMessages()
-        {
-            return await _unitOfWork.ContactsRepository.GetAllMessages();
-        }
+        public async Task<IEnumerable<Contacts>> GetAllMessages() => await _unitOfWork.ContactsRepository.GetAllMessages();
 
         public async Task SendMessage(Contacts contacts)
         {

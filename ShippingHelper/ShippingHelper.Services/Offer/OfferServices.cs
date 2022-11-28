@@ -13,10 +13,8 @@ namespace ShippingHelper.Services.Offer
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public OfferServices(IUnitOfWork unitOfWork)
-        {
-            this._unitOfWork = unitOfWork;
-        }
+        public OfferServices(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
+
         public async void AcceptOffer(Guid id, string userId)
         {
             await _unitOfWork.OffersRepository.AcceptOffer(id, userId);
@@ -43,25 +41,13 @@ namespace ShippingHelper.Services.Offer
             await _unitOfWork.SaveChanges();
         }
 
-        public async Task<IEnumerable<Offers>> GetAllOffers()
-        {
-            return await _unitOfWork.OffersRepository.GetAllAsync();
-        }
+        public async Task<IEnumerable<Offers>> GetAllOffers() => await _unitOfWork.OffersRepository.GetAllAsync();
 
-        public async Task<Offers> GetOffers(Guid id)
-        {
-            return await _unitOfWork.OffersRepository.GetById(id);
-        }
+        public async Task<Offers> GetOffers(Guid id) => await _unitOfWork.OffersRepository.GetById(id);
 
-        public async Task<IEnumerable<Offers>> GetOffersByCity(int cityId)
-        {
-            return await _unitOfWork.OffersRepository.GetOFfersByCityId(cityId);
-        }
+        public async Task<IEnumerable<Offers>> GetOffersByCity(int cityId) => await _unitOfWork.OffersRepository.GetOFfersByCityId(cityId);
 
-        public async Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId)
-        {
-            return await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
-        }
+        public async Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId) => await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
 
         public async void Update(ShippingOfferForm form)
         {

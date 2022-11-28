@@ -16,9 +16,6 @@ namespace ShippingHelper.Repository.Repository
 		{
 		}
 
-		public async Task<IEnumerable<Contacts>> GetAllMessages()
-		{
-			return await _DbContext.Contacts.ToListAsync();
-		}
+		public async Task<IEnumerable<Contacts>> GetAllMessages() => await _DbContext.Contacts.ToListAsync();
 	}
 }

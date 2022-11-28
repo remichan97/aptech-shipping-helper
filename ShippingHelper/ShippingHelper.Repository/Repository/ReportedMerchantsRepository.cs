@@ -17,9 +17,6 @@ namespace ShippingHelper.Repository.Repository
         {
         }
 
-        public async Task<IEnumerable<ReportedMerchant>> GetAllReports()
-        {
-            return await _DbContext.ReportedMerchants.ToListAsync();
-        }
+        public async Task<IEnumerable<ReportedMerchant>> GetAllReports() => await _DbContext.ReportedMerchants.ToListAsync();
     }
 }

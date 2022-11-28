@@ -12,10 +12,7 @@ namespace ShippingHelper.Services.Reports
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ReportMerchantServices(IUnitOfWork unitOfWork)
-        {
-            this._unitOfWork = unitOfWork;
-        }
+        public ReportMerchantServices(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
 
         public async Task Add(ReportedMerchant reported)
         {
@@ -23,9 +20,6 @@ namespace ShippingHelper.Services.Reports
             await _unitOfWork.SaveChanges();
         }
 
-        public async Task<IEnumerable<ReportedMerchant>> GetAll()
-        {
-            return await _unitOfWork.ReportMerchantsRepository.GetAllReports();
-        }
+        public async Task<IEnumerable<ReportedMerchant>> GetAll() => await _unitOfWork.ReportMerchantsRepository.GetAllReports();
     }
 }

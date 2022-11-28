@@ -16,27 +16,16 @@ namespace ShippingHelper.Repository.Repository
 		{
 		}
 
-        
-
         public async Task AcceptOffer(Guid id, string userId)
         {
             var offer = new AcceptOffers { OfferId = id, UserId = userId };
             await _DbContext.AcceptOffers.AddAsync(offer);
         }
 
-        public async Task<IEnumerable<Offers>> GetAllAsync()
-        {
-            return await _DbContext.Offers.Include(it => it.Users).ToListAsync();
-        }
+        public async Task<IEnumerable<Offers>> GetAllAsync() => await _DbContext.Offers.Include(it => it.Users).ToListAsync();
 
-        public async Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId)
-        {
-            return await _DbContext.Offers.Include(it => it.Users).Where(it => it.CityId ==  cityId).ToListAsync();
-        }
+        public async Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.CityId == cityId).ToListAsync();
 
-        public async Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId)
-        {
-            return await _DbContext.Offers.Where(it => it.UserId == userId).ToListAsync();
-        }
+        public async Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId) => await _DbContext.Offers.Where(it => it.UserId == userId).ToListAsync();
     }
 }
