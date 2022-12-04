@@ -49,10 +49,16 @@ namespace ShippingHelper.Services.Offer
 
         public async Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId) => await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
 
-        public async void Update(ShippingOfferForm form)
+        public async void Update(ShippingOfferForm form, Guid id)
         {
+
+            var offer = await GetOffers(id);
+
+            if (offer.Status != OfferStatus.Open) throw new InvalidOperationException();
+
             Offers offers = new Offers
             {
+                Id = id,
                 StartAddress = form.StartAddress,
                 EndAddress = form.EndAddress,
                 Price = form.Price,

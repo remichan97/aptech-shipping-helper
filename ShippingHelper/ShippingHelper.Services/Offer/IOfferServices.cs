@@ -15,7 +15,7 @@ namespace ShippingHelper.Services.Offer
         Task<IEnumerable<Offers>> GetOffersByCity(int cityId);
         Task<Offers> GetOffers(Guid id);
         void Add(ShippingOfferForm form);
-        void Update(ShippingOfferForm form);
+        void Update(ShippingOfferForm form, Guid id);
         void Delete(Guid id);
         void AcceptOffer(Guid id, string userId);
 

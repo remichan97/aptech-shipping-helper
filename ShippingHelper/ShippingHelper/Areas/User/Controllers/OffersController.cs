@@ -98,10 +98,11 @@ namespace ShippingHelper.Areas.User.Controllers
             }
 
             var offers = await _services.GetOffers(id.Value);
-            if (offers == null)
+            if (offers == null || offers.Status != OfferStatus.Open)
             {
                 return NotFound();
             }
+
             ViewBag["id"] = offers.Id;
             return View(offers);
         }
@@ -128,14 +129,23 @@ namespace ShippingHelper.Areas.User.Controllers
         [Authorize(Roles = Roles.User)]
         public async Task<IActionResult> Edit(Guid id, [Bind("StartAddress,EndAddress,Note,Price")] ShippingOfferForm form)
         {
+            var offer = await _services.GetOffers(id);
+
+            if (offer.Status != OfferStatus.Open)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _services.Update(form);
+                    _services.Update(form, id);
                 }
                 catch (InvalidOperationException)
                 {
+                    TempData["error"] = "Unable to proceed, the offer has been accepted";
+                    return RedirectToAction(nameof(Index));
                 }
                 return RedirectToAction(nameof(Index));
             }

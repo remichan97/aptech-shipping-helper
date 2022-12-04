@@ -32,6 +32,7 @@ namespace ShippingHelper.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
+                reportedMerchant.Id = Guid.NewGuid();
                 await _services.Add(reportedMerchant);
                 return RedirectToAction(nameof(Index));
             }
