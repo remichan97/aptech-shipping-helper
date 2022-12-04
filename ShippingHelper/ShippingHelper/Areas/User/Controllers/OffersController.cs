@@ -129,18 +129,15 @@ namespace ShippingHelper.Areas.User.Controllers
         [Authorize(Roles = Roles.User)]
         public async Task<IActionResult> Edit(Guid id, [Bind("StartAddress,EndAddress,Note,Price")] ShippingOfferForm form)
         {
-            var offer = await _services.GetOffers(id);
-
-            if (offer.Status != OfferStatus.Open)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     _services.Update(form, id);
+                }
+                catch (ArgumentNullException)
+                {
+                    return NotFound();
                 }
                 catch (InvalidOperationException)
                 {

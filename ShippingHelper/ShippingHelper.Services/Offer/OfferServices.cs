@@ -1,11 +1,6 @@
 ﻿using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShippingHelper.Services.Offer
 {
@@ -51,8 +46,9 @@ namespace ShippingHelper.Services.Offer
 
         public async void Update(ShippingOfferForm form, Guid id)
         {
-
             var offer = await GetOffers(id);
+
+            if (offer is null) throw new ArgumentNullException(nameof(offer));
 
             if (offer.Status != OfferStatus.Open) throw new InvalidOperationException();
 

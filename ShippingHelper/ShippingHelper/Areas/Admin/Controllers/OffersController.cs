@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShippingHelper.Common.Constants;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
+using ShippingHelper.Services.Offer;
 
 namespace ShippingHelper.Areas.Admin.Controllers
 {
@@ -17,10 +14,12 @@ namespace ShippingHelper.Areas.Admin.Controllers
     public class OffersController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IOfferServices _services;
 
-        public OffersController(AppDbContext context)
+        public OffersController(AppDbContext context, IOfferServices services)
         {
             _context = context;
+            this._services = services;
         }
 
         // GET: Admin/Offers
@@ -160,14 +159,14 @@ namespace ShippingHelper.Areas.Admin.Controllers
             {
                 _context.Offers.Remove(offers);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OffersExists(Guid id)
         {
-          return _context.Offers.Any(e => e.Id == id);
+            return _context.Offers.Any(e => e.Id == id);
         }
     }
 }

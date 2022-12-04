@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ShippingHelper.Common.Constants;
+using ShippingHelper.Core.Models;
 
 namespace ShippingHelper.Areas.Admin.Controllers
 {
@@ -9,16 +11,18 @@ namespace ShippingHelper.Areas.Admin.Controllers
     [Authorize(Roles = Roles.Administrator)]
     public class UsersController : Controller
     {
+        private readonly UserManager<Users> _userManager;
+
+        public UsersController(UserManager<Users> userManager)
+        {
+            this._userManager = userManager;
+        }
+
         // GET: UsersController
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: UsersController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            var data = _userManager.Users.ToList();
+            return View(data);
         }
 
         // GET: UsersController/Create
