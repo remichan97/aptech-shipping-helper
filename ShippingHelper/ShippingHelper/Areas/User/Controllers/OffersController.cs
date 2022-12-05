@@ -135,15 +135,20 @@ namespace ShippingHelper.Areas.User.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.User)]
-        public async Task<IActionResult> Create([Bind("StartAddress,EndAddress,Note,Price")] ShippingOfferForm form)
+        public async Task<IActionResult> Create([Bind("StartAddress,EndAddress,Note,Price,ProductName,Quantity,Description,ImageFile")] ShippingOfferForm form)
         {
-            if (ModelState.IsValid)
-            {
-                _services.Add(form);
-                return RedirectToAction(nameof(Index));
-            }
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var id = user.Id;
+
+            int cityId = user.CityId;
+
+            if (ModelState.IsValid)
+            {
+                await _services.Add(form, id, cityId);
+                return RedirectToAction(nameof(UserPosted));
+            }
 
             var start = user.Address;
 

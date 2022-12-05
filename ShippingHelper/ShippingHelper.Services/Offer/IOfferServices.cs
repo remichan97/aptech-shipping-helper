@@ -19,7 +19,7 @@ namespace ShippingHelper.Services.Offer
 
         Task<Offers> GetOffers(Guid id);
 
-        void Add(ShippingOfferForm form);
+        Task Add(ShippingOfferForm form, string userId, int cityId);
 
         void Update(ShippingOfferForm form, Guid id);
 

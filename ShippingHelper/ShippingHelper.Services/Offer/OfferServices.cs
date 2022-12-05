@@ -1,4 +1,5 @@
-﻿using ShippingHelper.Core.Models;
+﻿using ShippingHelper.Common.Methods;
+using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.ViewModels;
 
@@ -16,14 +17,28 @@ namespace ShippingHelper.Services.Offer
             await _unitOfWork.SaveChanges();
         }
 
-        public async void Add(ShippingOfferForm form)
+        public async Task Add(ShippingOfferForm form, string userId, int cityId)
         {
+
+            form.ImagePath = await FileHelpers.CopyFiles(form.ImageFile);
+
+            ProductOffers productOffers = new ProductOffers
+            {
+                Name = form.ProductName,
+                Description = form.Description,
+                Quantity = form.Quantity,
+                Image = form.ImagePath
+            };
+
             Offers offers = new Offers
             {
                 StartAddress = form.StartAddress,
                 EndAddress = form.EndAddress,
                 Price = form.Price,
-                Note = form.Note
+                Note = form.Note,
+                ProductOffers = productOffers,
+                UserId = userId,
+                CityId = cityId
             };
 
             await _unitOfWork.OffersRepository.Add(offers);

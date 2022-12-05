@@ -27,4 +27,8 @@
     <ProjectReference Include="..\ShippingHelper.ViewModels\ShippingHelper.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\product\img\" />
+  </ItemGroup>
+
 </Project>
