@@ -3,12 +3,12 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "font-awesome@6.2.1",
-      "destination": "wwwroot/admin/lib/font-awesome/"
-    },
-    {
       "library": "limonte-sweetalert2@11.6.15",
       "destination": "wwwroot/lib/limonte-sweetalert2/"
+    },
+    {
+      "library": "font-awesome@6.2.1",
+      "destination": "wwwroot/lib/font-awesome/"
     }
   ]
 }

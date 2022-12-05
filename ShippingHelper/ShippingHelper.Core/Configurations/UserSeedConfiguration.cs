@@ -51,7 +51,7 @@ namespace ShippingHelper.Core.Configurations
 					LastName = "Shop Merchant",
 					Email = "shop@shiplink.com",
 					NormalizedEmail = "SHOP@SHPLINK.COM",
-					Address = "Shop Address",
+					Address = "189 Thanh Nhan, Hai Ba Trung",
 					UserName = "shop@shiplink.com",
 					NormalizedUserName = "SHOP@SHIPLINK.COM",
 					PasswordHash = hasher.HashPassword(null, "remich@n97"),

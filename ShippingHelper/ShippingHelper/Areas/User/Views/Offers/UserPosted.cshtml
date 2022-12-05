@@ -5,7 +5,7 @@
 }
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> New Offer</a>
 </p>
 <table class="table">
     <thead>
@@ -15,9 +15,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -39,9 +36,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EndAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

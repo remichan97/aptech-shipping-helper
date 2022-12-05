@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShippingHelper.Core.Data;
 
@@ -11,9 +12,10 @@ using ShippingHelper.Core.Data;
 namespace ShippingHelper.Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205134425_EditShopAddress")]
+    partial class EditShopAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,19 +54,19 @@ namespace ShippingHelper.Core.Migrations
                         new
                         {
                             Id = "40f71694-8d9d-4c9e-9698-4ebaad596253",
-                            ConcurrencyStamp = "06fcbfcd-a31e-4c09-a09a-c6590d5e6aac",
+                            ConcurrencyStamp = "60956298-f703-461d-a7b1-db7ad1726a2b",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "433bef6f-10d9-44f3-9193-28a8bfa35c5c",
-                            ConcurrencyStamp = "e16c88f2-4245-4d04-9c26-af6f994a132f",
+                            ConcurrencyStamp = "fd34513b-4651-4cb1-80b9-41d648c47590",
                             Name = "Shipping Merchant"
                         },
                         new
                         {
                             Id = "d51059b9-ca3b-4fdd-ad1e-23b9e4956686",
-                            ConcurrencyStamp = "5de05113-0992-40b5-9f2a-f82b38281ed2",
+                            ConcurrencyStamp = "4a42f8aa-dc2c-4cf8-830c-3ce565c1e26e",
                             Name = "Shop Merchant"
                         });
                 });
@@ -708,8 +710,7 @@ namespace ShippingHelper.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfferId")
-                        .IsUnique();
+                    b.HasIndex("OfferId");
 
                     b.ToTable("ProductOffers");
                 });
@@ -771,15 +772,15 @@ namespace ShippingHelper.Core.Migrations
                         {
                             Id = "afaf3585-a2a3-4157-b5a1-cebd30c53a1c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "700991aa-9fab-4d98-b542-11b06af53459",
+                            ConcurrencyStamp = "05409414-6d4d-495c-8e5b-8d15f9080288",
                             Email = "admin@shiplink.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SHPLINK.COM",
                             NormalizedUserName = "ADMIN@SHIPLINK.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJcuwDg5vzoMYjMKsimgnDnEBl4lbTB2l9s9EUiB92jWdAQFEP/2/L7e/A8+MAsx4w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECGjtQMwkLJIL/26znOu6oyGLWepwGArB1tL0zD6xkyoTcBT+j9mDjArnAhD0L9RYw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "11831853-c983-4f78-a620-f2b1c4a4ca5e",
+                            SecurityStamp = "de29def9-32bc-4852-b434-e610a0b4b2c5",
                             TwoFactorEnabled = false,
                             UserName = "admin@shiplink.com",
                             Address = "Admin",
@@ -792,15 +793,15 @@ namespace ShippingHelper.Core.Migrations
                         {
                             Id = "f9f0d5c7-ba2f-4ac0-b7be-897983ae5236",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1830ce3a-259f-4cca-b8d6-2c254495cb6b",
+                            ConcurrencyStamp = "e12d369c-0fdc-437b-a1a3-28d585bdbbff",
                             Email = "shipper@shiplink.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SHIPPER@SHPLINK.COM",
                             NormalizedUserName = "SHIPPER@SHIPLINK.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGCoR9No03KBtBjokd8d06RWzt47oAPct0TqaRQa88V97qkrlCLIEG//XyR75mlSSA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGemTM4iWLEJgmxnnws1y3FMyFcqXjVZkWtM+y3WuS9P8xwv0ChyRU5tgVy8y5sJTA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cb1032d2-4b00-4328-a213-3007c61f9d13",
+                            SecurityStamp = "7661e4f0-2eeb-41e6-a571-c2a219b0d686",
                             TwoFactorEnabled = false,
                             UserName = "shipper@shiplink.com",
                             Address = "Shipping",
@@ -813,15 +814,15 @@ namespace ShippingHelper.Core.Migrations
                         {
                             Id = "99ba2b16-99c6-41e5-b6be-7401c6896d02",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "80368a68-6071-4d98-a374-dfe8cdf58cfc",
+                            ConcurrencyStamp = "47c0691e-f89c-4e97-b500-8addea737eab",
                             Email = "shop@shiplink.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SHOP@SHPLINK.COM",
                             NormalizedUserName = "SHOP@SHIPLINK.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJFc9uDh+ehJ5GUQTr4Ewr6wdnfcvgewE6JFexNFweBVbVrACGdwfzo+eHW2VB2m9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBExecLDd+Aj2iH1q0TRtea7pSIFK+r4oY1163CCIs9enEbR4Vv0pKRNvWNuHT5VDw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "95fee4be-1b02-4f91-8be6-7466ada71c44",
+                            SecurityStamp = "c7ce3fa0-f2eb-4d9c-9c76-8c5d01af658d",
                             TwoFactorEnabled = false,
                             UserName = "shop@shiplink.com",
                             Address = "189 Thanh Nhan, Hai Ba Trung",
@@ -924,8 +925,8 @@ namespace ShippingHelper.Core.Migrations
             modelBuilder.Entity("ShippingHelper.Core.Models.ProductOffers", b =>
                 {
                     b.HasOne("ShippingHelper.Core.Models.Offers", "Offers")
-                        .WithOne("ProductOffers")
-                        .HasForeignKey("ShippingHelper.Core.Models.ProductOffers", "OfferId")
+                        .WithMany("ProductOffers")
+                        .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -963,8 +964,7 @@ namespace ShippingHelper.Core.Migrations
 
             modelBuilder.Entity("ShippingHelper.Core.Models.Offers", b =>
                 {
-                    b.Navigation("ProductOffers")
-                        .IsRequired();
+                    b.Navigation("ProductOffers");
                 });
 
             modelBuilder.Entity("ShippingHelper.Core.Models.Users", b =>

@@ -17,6 +17,6 @@ namespace ShippingHelper.Core.Models
         public string Image { get; set; }
         [ForeignKey("Offers")]
         public Guid OfferId { get; set; }
-		public virtual Offers Offers { get; set; }
+        public virtual Offers Offers { get; set; }
 	}
 }

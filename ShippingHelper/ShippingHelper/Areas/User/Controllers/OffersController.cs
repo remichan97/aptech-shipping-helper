@@ -118,8 +118,14 @@ namespace ShippingHelper.Areas.User.Controllers
 
         // GET: User/Offers/Create
         [Authorize(Roles = Roles.User)]
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var start = user.Address;
+
+            ViewBag.Address = start;
+
             return View();
         }
 
@@ -136,6 +142,13 @@ namespace ShippingHelper.Areas.User.Controllers
                 _services.Add(form);
                 return RedirectToAction(nameof(Index));
             }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var start = user.Address;
+
+            ViewBag.Address = start;
+
             return View(form);
         }
 
