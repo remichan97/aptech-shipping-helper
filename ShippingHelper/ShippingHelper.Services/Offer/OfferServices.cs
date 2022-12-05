@@ -42,6 +42,10 @@ namespace ShippingHelper.Services.Offer
 
         public async Task<IEnumerable<Offers>> GetOffersByCity(int cityId) => await _unitOfWork.OffersRepository.GetOFfersByCityId(cityId);
 
+        public async Task<IEnumerable<Offers>> GetOffersByStatus(OfferStatus status) => await _unitOfWork.OffersRepository.GetOffersByStatus(status);
+
+        public async Task<IEnumerable<Offers>> GetOffersByUserAndByStatus(string userId, OfferStatus status) => await _unitOfWork.OffersRepository.GetOffersByUserAndByStatus(userId, status);
+
         public async Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId) => await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
 
         public async void Update(ShippingOfferForm form, Guid id)

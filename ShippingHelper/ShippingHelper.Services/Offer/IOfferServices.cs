@@ -11,6 +11,10 @@ namespace ShippingHelper.Services.Offer
 
         Task<IEnumerable<Offers>> GetOffersByCity(int cityId);
 
+        Task<IEnumerable<Offers>> GetOffersByStatus(OfferStatus status);
+
+        Task<IEnumerable<Offers>> GetOffersByUserAndByStatus(string userId, OfferStatus status);
+
         Task<Offers> GetOffers(Guid id);
 
         void Add(ShippingOfferForm form);
