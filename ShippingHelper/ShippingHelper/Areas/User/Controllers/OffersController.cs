@@ -74,6 +74,31 @@ namespace ShippingHelper.Areas.User.Controllers
 
         }
 
+        [Authorize(Roles = Roles.User)]
+        public async Task<IActionResult> OngoingOffers()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var userId = user.Id;
+
+            var data = await _services.GetCreatedOFferByUserAndStatus(userId, OfferStatus.Delivering);
+
+            return View(data);
+
+        }
+
+        [Authorize(Roles = Roles.Shipper)]
+        public async Task<IActionResult> CompletedOffers()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var userId = user.Id;
+
+            var data = await _services.GetCreatedOFferByUserAndStatus(userId, OfferStatus.Finished);
+
+            return View(data);
+        }
+
         // GET: User/Offers/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {

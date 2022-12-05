@@ -38,6 +38,8 @@ namespace ShippingHelper.Services.Offer
 
         public async Task<IEnumerable<Offers>> GetAllOffers() => await _unitOfWork.OffersRepository.GetAllAsync();
 
+        public async Task<IEnumerable<Offers>> GetCreatedOFferByUserAndStatus(string userId, OfferStatus status) => await _unitOfWork.OffersRepository.GetCreatedOfferByStatus(userId, status);
+
         public async Task<Offers> GetOffers(Guid id) => await _unitOfWork.OffersRepository.GetById(id);
 
         public async Task<IEnumerable<Offers>> GetOffersByCity(int cityId) => await _unitOfWork.OffersRepository.GetOFfersByCityId(cityId);
