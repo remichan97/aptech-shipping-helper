@@ -24,9 +24,13 @@ namespace ShippingHelper.Controllers
             {
                 return RedirectToAction("Index", "Offers", new { area = "Admin"});
             }
-            else
+            else if (roles.Contains(Roles.Shipper))
             {
                 return RedirectToAction("Index", "Offers", new { area = "User" });
+            }
+            else
+            {
+                return RedirectToAction("UserPosted", "Offers", new { area = "User" });
             }
 
         }

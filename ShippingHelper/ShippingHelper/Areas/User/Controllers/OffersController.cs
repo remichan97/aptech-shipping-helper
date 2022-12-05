@@ -32,7 +32,7 @@ namespace ShippingHelper.Areas.User.Controllers
 
             var cityId = user.CityId;
 
-            var data = _services.GetOffersByCity(cityId);
+            var data = await _services.GetOffersByCity(cityId);
 
             return View(data);
         }
@@ -44,7 +44,7 @@ namespace ShippingHelper.Areas.User.Controllers
 
             var userId = user.Id;
 
-            var data = _services.GetOffersCreatedByUser(userId);
+            var data = await _services.GetOffersCreatedByUser(userId);
             return View(data);
         }
 

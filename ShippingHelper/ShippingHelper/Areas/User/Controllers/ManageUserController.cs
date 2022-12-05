@@ -12,10 +12,12 @@ namespace ShippingHelper.Areas.User.Controllers
     public class ManageUserController : Controller
     {
         private readonly UserManager<Users> _userManager;
+        private readonly SignInManager<Users> _signInManager;
 
-        public ManageUserController(UserManager<Users> userManager)
+        public ManageUserController(UserManager<Users> userManager, SignInManager<Users> signInManager)
         {
             this._userManager = userManager;
+            this._signInManager = signInManager;
         }
 
         // GET: ManageUserController/Edit/5
@@ -68,7 +70,8 @@ namespace ShippingHelper.Areas.User.Controllers
             switch (res.Succeeded)
             {
                 case true:
-                    return RedirectToAction(nameof(Index), new { area = "User" });
+                    await _signInManager.SignOutAsync();
+                    return RedirectToAction(nameof(Index), "Home", new { area = "default" });
 
                 default:
                     TempData["Error"] = "Incorrect Password! Please try again";
