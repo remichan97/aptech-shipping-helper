@@ -87,7 +87,7 @@ namespace ShippingHelper.Areas.User.Controllers
 
         }
 
-        [Authorize(Roles = Roles.Shipper)]
+        [Authorize(Roles = Roles.User)]
         public async Task<IActionResult> CompletedOffers()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);

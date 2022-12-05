@@ -57,6 +57,8 @@ namespace ShippingHelper.Areas.User.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordForm form)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
