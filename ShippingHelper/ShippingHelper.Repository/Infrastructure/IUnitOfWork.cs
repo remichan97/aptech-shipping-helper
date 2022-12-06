@@ -11,6 +11,7 @@ public interface IUnitOfWork : IDisposable
 	public IProductOffersRepository ProductOffersRepository { get; }
 	public IUsersRepository UsersRepository { get; }
 	public IReportMerchantsRepository ReportMerchantsRepository { get; }
+	public ICitiesRepository CitiesRepository { get; }
     public AppDbContext AppDbContext { get; }
 
 	Task<int> SaveChanges();

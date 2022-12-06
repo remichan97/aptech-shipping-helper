@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ShippingHelper.Repository\ShippingHelper.Repository.csproj" />
     <ProjectReference Include="..\ShippingHelper.ViewModels\ShippingHelper.ViewModels.csproj" />
   </ItemGroup>

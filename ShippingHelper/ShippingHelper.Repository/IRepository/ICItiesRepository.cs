@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShippingHelper.Repository.IRepository;
 
-public interface ICItiesRepository : IBaseRepository<Cities>
+public interface ICitiesRepository : IBaseRepository<Cities>
 {
+    Task<IEnumerable<Cities>> GetAllCities();
 }

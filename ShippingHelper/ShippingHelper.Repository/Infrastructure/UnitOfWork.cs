@@ -13,6 +13,7 @@ namespace ShippingHelper.Repository.Infrastructure
         private IProductOffersRepository _productOffersRepository;
         private IUsersRepository _usersRepository;
         private IReportMerchantsRepository _reportMerchantsRepository;
+        private ICitiesRepository _citiesRepository;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -32,6 +33,8 @@ namespace ShippingHelper.Repository.Infrastructure
         public IUsersRepository UsersRepository => _usersRepository ?? (_usersRepository = new UsersRepository(_context));
 
         public IReportMerchantsRepository ReportMerchantsRepository => _reportMerchantsRepository ?? (_reportMerchantsRepository = new ReportedMerchantsRepository(_context));
+
+        public ICitiesRepository CitiesRepository => _citiesRepository ?? (_citiesRepository = new CitiesRepository(_context));
 
         public void Dispose()
         {
