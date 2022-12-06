@@ -18,5 +18,8 @@ namespace ShippingHelper.Repository.IRepository
         Task<IEnumerable<Offers>> GetCreatedOfferByStatus(string userId ,OfferStatus status);
 
         Task AcceptOffer(Guid id, string userId);
+
+        Task ChangeOfferStatus(OfferStatus status, Guid id);
+
     }
 }

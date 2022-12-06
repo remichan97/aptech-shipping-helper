@@ -19,7 +19,25 @@ namespace ShippingHelper.Repository.Repository
         public async Task AcceptOffer(Guid id, string userId)
         {
             var offer = new AcceptOffers { OfferId = id, UserId = userId };
+
+            var data = await GetById(id);
+
+            data.Status = OfferStatus.Accepted;
+
             await _DbContext.AcceptOffers.AddAsync(offer);
+
+            _DbContext.Offers.Update(data);
+        }
+
+        public async Task ChangeOfferStatus(OfferStatus status, Guid id)
+        {
+            var offer = await GetById(id);
+
+            if (offer is null) throw new ArgumentNullException(nameof(offer));
+
+            offer.Status = status;
+
+            _DbContext.Offers.Update(offer);
         }
 
         public async Task<IEnumerable<Offers>> GetAllAsync() => await _DbContext.Offers.Include(it => it.Users).ToListAsync();

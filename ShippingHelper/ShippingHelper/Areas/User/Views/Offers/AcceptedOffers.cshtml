@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<ShippingHelper.Core.Models.Offers>
 
 @{
-    ViewData["Title"] = "AcceptedOffers";
+    ViewData["Title"] = "Accepted Offers";
 }
 
 <h1>AcceptedOffers</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<p>Showing offers you have accepted only</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -33,10 +32,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Users)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cities)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -62,13 +57,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Users.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cities.Name)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

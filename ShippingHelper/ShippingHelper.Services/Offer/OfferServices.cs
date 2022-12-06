@@ -11,7 +11,7 @@ namespace ShippingHelper.Services.Offer
 
         public OfferServices(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
 
-        public async void AcceptOffer(Guid id, string userId)
+        public async Task AcceptOffer(Guid id, string userId)
         {
             await _unitOfWork.OffersRepository.AcceptOffer(id, userId);
             await _unitOfWork.SaveChanges();
@@ -42,6 +42,12 @@ namespace ShippingHelper.Services.Offer
             };
 
             await _unitOfWork.OffersRepository.Add(offers);
+            await _unitOfWork.SaveChanges();
+        }
+
+        public async Task ChangeOfferStatus(OfferStatus status, Guid id)
+        {
+            await _unitOfWork.OffersRepository.ChangeOfferStatus(status,id);
             await _unitOfWork.SaveChanges();
         }
 

@@ -25,6 +25,8 @@ namespace ShippingHelper.Services.Offer
 
         void Delete(Guid id);
 
-        void AcceptOffer(Guid id, string userId);
+        Task AcceptOffer(Guid id, string userId);
+
+        Task ChangeOfferStatus(OfferStatus status, Guid id);
     }
 }

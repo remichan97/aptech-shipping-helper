@@ -172,8 +172,16 @@ namespace ShippingHelper.Areas.User.Controllers
                 return NotFound();
             }
 
+            ShippingOfferForm data = new ShippingOfferForm
+            {
+                StartAddress = offers.StartAddress,
+                EndAddress = offers.EndAddress,
+                Price = offers.Price,
+                Note = offers.Note
+            };
+
             ViewBag["id"] = offers.Id;
-            return View(offers);
+            return View(data);
         }
 
         [Authorize(Roles = Roles.Shipper)]
@@ -196,7 +204,7 @@ namespace ShippingHelper.Areas.User.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = Roles.User)]
-        public async Task<IActionResult> Edit(Guid id, [Bind("StartAddress,EndAddress,Note,Price")] ShippingOfferForm form)
+        public async Task<IActionResult> Edit(Guid id, [Bind("EndAddress,Note,Price")] ShippingOfferForm form)
         {
             if (ModelState.IsValid)
             {
