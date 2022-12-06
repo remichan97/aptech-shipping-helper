@@ -23,6 +23,7 @@ namespace ShippingHelper.Core.Models
 		public string Note { get; set; }
 		public double Price { get; set; }
 		public DateTime PostedDate { get; set; } = DateTime.Now;
+		public DateTime? CompletedDate { get; set; }
 		public OfferStatus Status { get; set; } = OfferStatus.Open;
 		[ForeignKey("Users")]
 		public string UserId { get; set; }

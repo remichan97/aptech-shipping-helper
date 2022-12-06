@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ShippingHelper.Common.Constants;
 using ShippingHelper.Core.Models;
 
 namespace ShippingHelper.Areas.Identity.Pages.Account
@@ -124,7 +125,7 @@ namespace ShippingHelper.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/RedirectUser");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -144,7 +145,15 @@ namespace ShippingHelper.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    
+                    switch (Input.AccountType)
+                    {
+                        case 1:
+                            await _userManager.AddToRoleAsync(user,Roles.Shipper);
+                            break;
+                        case 2:
+                            await _userManager.AddToRoleAsync(user, Roles.User);
+                            break;
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
