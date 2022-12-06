@@ -51,7 +51,7 @@ namespace ShippingHelper.Services.Offer
             await _unitOfWork.SaveChanges();
         }
 
-        public async void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             _unitOfWork.OffersRepository.Delete(id);
             await _unitOfWork.SaveChanges();
@@ -71,7 +71,7 @@ namespace ShippingHelper.Services.Offer
 
         public async Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId) => await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
 
-        public async void Update(ShippingOfferForm form, Guid id)
+        public async Task Update(ShippingOfferForm form, Guid id)
         {
             var offer = await GetOffers(id);
 

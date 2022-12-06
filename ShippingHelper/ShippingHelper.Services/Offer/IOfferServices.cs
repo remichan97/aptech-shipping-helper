@@ -21,9 +21,9 @@ namespace ShippingHelper.Services.Offer
 
         Task Add(ShippingOfferForm form, string userId, int cityId);
 
-        void Update(ShippingOfferForm form, Guid id);
+        Task Update(ShippingOfferForm form, Guid id);
 
-        void Delete(Guid id);
+        Task Delete(Guid id);
 
         Task AcceptOffer(Guid id, string userId);
 
