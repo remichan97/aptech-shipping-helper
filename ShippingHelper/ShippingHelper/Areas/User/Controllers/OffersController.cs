@@ -99,6 +99,16 @@ namespace ShippingHelper.Areas.User.Controllers
             return View(data);
         }
 
+        [Authorize(Roles = Roles.Shipper)]
+        public async Task<IActionResult> ChangeOfferStatus(Guid? id, OfferStatus status)
+        {
+            if (id is null) return NotFound();
+
+            await _services.ChangeOfferStatus(status, id.Value);
+
+            return RedirectToAction("Details", new { id = id });
+        }
+
         // GET: User/Offers/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {

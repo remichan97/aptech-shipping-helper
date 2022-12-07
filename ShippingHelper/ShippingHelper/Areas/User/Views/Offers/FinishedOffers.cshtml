@@ -12,47 +12,43 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StartAddress)
+                Delivery to
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndAddress)
+                Offer Price
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note)
+                Date Posted
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Completed Date
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompletedDate)
-            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompletedDate)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletedDate)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
