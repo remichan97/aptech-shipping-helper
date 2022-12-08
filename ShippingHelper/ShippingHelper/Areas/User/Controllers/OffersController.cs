@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShippingHelper.Common.Constants;
 using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
+using ShippingHelper.Services.AcceptOffer;
 using ShippingHelper.Services.Offer;
 using ShippingHelper.ViewModels;
 
@@ -13,14 +14,14 @@ namespace ShippingHelper.Areas.User.Controllers
     [Authorize(Roles = Roles.Shipper + "," + Roles.User)]
     public class OffersController : Controller
     {
-        private readonly AppDbContext _context;
         private readonly IOfferServices _services;
+        private readonly IAcceptOfferService _offerService;
         private readonly UserManager<Users> _userManager;
 
-        public OffersController(AppDbContext context, IOfferServices services, UserManager<Users> userManager)
+        public OffersController(IOfferServices services, IAcceptOfferService offerService, UserManager<Users> userManager)
         {
-            _context = context;
             this._services = services;
+            this._offerService = offerService;
             this._userManager = userManager;
         }
 
@@ -112,6 +113,8 @@ namespace ShippingHelper.Areas.User.Controllers
         // GET: User/Offers/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
+            string userId = await _offerService.GetUserIdForAcceptOffer(id.Value);
+
             if (id == null)
             {
                 return NotFound();
@@ -123,6 +126,13 @@ namespace ShippingHelper.Areas.User.Controllers
                 return NotFound();
             }
 
+            if (offers.Status == OfferStatus.Open)
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+
+                ViewBag.userId = userId;
+                ViewBag.FirstName = user.FirstName; ViewBag.LastName = user.LastName;
+            }
             return View(offers);
         }
 
@@ -204,8 +214,9 @@ namespace ShippingHelper.Areas.User.Controllers
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            _services.AcceptOffer(id.Value, user.Id);
-            return RedirectToAction(nameof(Index));
+            await _services.AcceptOffer(id.Value, user.Id);
+            TempData["accept"] = "You have accepted this offer!";
+            return RedirectToAction(nameof(Details));
         }
 
         // POST: User/Offers/Edit/5
@@ -235,6 +246,42 @@ namespace ShippingHelper.Areas.User.Controllers
             }
             ViewBag["id"] = id;
             return View(form);
+        }
+
+        [Authorize(Roles = Roles.User)]
+        [HttpPost]
+        public async Task<IActionResult> ReportMerchant(IFormCollection form)
+        {
+            string userID = form["userId"];
+            int reason = int.Parse(form["reason"]);
+            string note = form["note"];
+
+            ReportedMerchant report = new ReportedMerchant
+            {
+                UserId = userID,
+                Description = note
+            };
+
+            switch (reason)
+            {
+                case 1:
+                    report.ReportType = ReportedMerchant.ReportTypes.AcceptedButNotCompleteShipping;
+                    break;
+                case 2:
+                    report.ReportType = ReportedMerchant.ReportTypes.MissingOrBrokenPackage;
+                    break;
+                case 3:
+                    report.ReportType = ReportedMerchant.ReportTypes.BadPersonality;
+                    break;
+                case 4:
+                    report.ReportType = ReportedMerchant.ReportTypes.Other;
+                    break;
+            }
+
+            await _services.ReportMerchants(report);
+            TempData["report"] = "Your report has been submitted! Thank you for letting us know";
+            return RedirectToAction(nameof(Details));
+
         }
 
         // GET: User/Offers/Delete/5

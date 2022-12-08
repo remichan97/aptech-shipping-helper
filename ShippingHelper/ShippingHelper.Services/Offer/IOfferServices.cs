@@ -28,5 +28,7 @@ namespace ShippingHelper.Services.Offer
         Task AcceptOffer(Guid id, string userId);
 
         Task ChangeOfferStatus(OfferStatus status, Guid id);
+
+        Task ReportMerchants(ReportedMerchant merchant);
     }
 }

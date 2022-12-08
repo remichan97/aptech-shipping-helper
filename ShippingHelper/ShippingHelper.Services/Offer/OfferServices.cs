@@ -71,6 +71,12 @@ namespace ShippingHelper.Services.Offer
 
         public async Task<IEnumerable<Offers>> GetOffersCreatedByUser(string userId) => await _unitOfWork.OffersRepository.GetOFfersCreatedByUser(userId);
 
+        public async Task ReportMerchants(ReportedMerchant merchant)
+        {
+            await _unitOfWork.ReportMerchantsRepository.Add(merchant);
+            await _unitOfWork.SaveChanges();
+        }
+
         public async Task Update(ShippingOfferForm form, Guid id)
         {
             var offer = await GetOffers(id);

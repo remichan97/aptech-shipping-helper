@@ -104,6 +104,42 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <a asp-action=""><i class="fas fa-user"></i> Edit Profile</a>
                     </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-key"></i> Change My Password</a>
+                    </li>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Chane password</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="ChangePassword" asp-controller="ManageUser">
+                                        <div class="mb-3">
+                                            <label for="current" class="col-form-label">Current Password</label>
+                                            <input type="password" id="current" name="current" class="form-control" required>
+                                        </div>
+                                        <br />
+                                        <div class="mb-3">
+                                            <label for="new" class="col-form-label">Mew Password:</label>
+                                            <input type="password" id="new" name="new" class="form-control" required>
+                                        </div>
+                                        <br />
+                                        <div class="mb-3">
+                                            <label for="verify" class="col-form-label">Retype your password:</label>
+                                            <input type="password" id="verify" name="verify" class="form-control" required>
+                                            <span class="error"></span>
+                                        </div>
+                                        <br />
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" onclick="return check();">Change Password</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @if (User.IsInRole(Roles.User))
                     {
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -146,7 +182,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 col-md-6">
                     <h4 class="text-light mb-4">Address</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Ha Noi, Viet Nam</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
                     <div class="d-flex pt-2">
@@ -209,6 +245,7 @@
 
     <!-- Template Javascript -->
     <script src="~/js/main.js"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

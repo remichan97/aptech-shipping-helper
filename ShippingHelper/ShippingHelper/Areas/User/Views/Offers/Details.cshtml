@@ -5,6 +5,20 @@
     ViewData["Title"] = "Offer Details";
 }
 
+@if (TempData["report"] is not null)
+{
+    <div class="alert alert-warning">
+        @TempData["report"]
+    </div>
+}
+
+@if (TempData["accept"] is not null)
+{
+    <div class="alert alert-success">
+        @TempData["accept"]
+    </div>
+}
+
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -55,7 +69,7 @@
                 Shipping Accepted By
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Users.Id)
+                @ViewBag.FirstName @ViewBag.LastName
             </dd>
         }
     </dl>
@@ -68,7 +82,7 @@
         switch (Model.Status)
         {
             case ShippingHelper.Core.Models.OfferStatus.Open:
-                <a asp-action="AcceptOffer" asp-route-id="@Model?.Id" class="btn btn-success">Accept Offer</a>
+                <a asp-action="AcceptOffer" asp-route-id="@Model?.Id" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept Offer</a>
                 break;
             case ShippingHelper.Core.Models.OfferStatus.Accepted:
                 <a asp-action="ChangeOfferStatus" asp-route-id="@Model?.Id" class="btn btn-info" asp-route-status="@ShippingHelper.Core.Models.OfferStatus.Delivering">Ready to Deliver</a>
@@ -85,10 +99,62 @@
             <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Edit</a>
             <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
         }
-        else
+        else if (Model.Status == ShippingHelper.Core.Models.OfferStatus.Delivering)
         {
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Report Merchant</a>
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#reportModal">Report Merchant</a>
         }
     }
 </div>
 
+@*Accept Offer Confirmation*@
+<div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Accept Offer</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Woould you like to accept this offer?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <a asp-action="AcceptOffer" asp-route-id="@Model?.Id" class="btn btn-primary">Yes! Accept the offer</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Report Merchant Modal*@
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportlLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="ReportMerchant">
+                    <input type="hidden" value="@ViewBag.userId" id="userId" name="userId"/>
+                    <p>You are reporting @ViewBag.FirstName @ViewBag.LastName</p>
+                    <div class="mb-3">
+                        <label for="reason">Please tell us why you are reporting this merchant:</label>
+                        <select id="reason" name="reason" class="form-select" required>
+                            <option value="" hidden selected>Please select an opption..</option>
+                            <option value="1">Did not deliver item</option>
+                            <option value="2">Missing or broken packages</option>
+                            <option value="3">Bad behaviour</option>
+                            <option value="4">Other...</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="note">Please give us some details why you are reporting this merchant?</label>
+                        <textarea id="note" name="note" rows="2"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

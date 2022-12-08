@@ -54,28 +54,26 @@ namespace ShippingHelper.Areas.User.Controllers
             }
         }
 
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangePassword(ChangePasswordForm form)
+        public async Task<IActionResult> ChangePassword(IFormCollection formData)
         {
+            string currentPassword = formData["current"];
+
+            string newPassword = formData["new"];
+
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            var res = await _userManager.ChangePasswordAsync(user, form.OldPassword, form.NewPassword);
+            var res = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 
             switch (res.Succeeded)
             {
                 case true:
                     await _signInManager.SignOutAsync();
                     return RedirectToAction(nameof(Index), "Home", new { area = "default" });
-
-                default:
-                    TempData["Error"] = "Incorrect Password! Please try again";
-                    return View(form);
+                case false:
+                    TempData["error"] = "Wrong Password, Please try again!";
+                    return RedirectToAction(nameof(Index), "RedirectUser", new { area = "default" });
             }
         }
     }

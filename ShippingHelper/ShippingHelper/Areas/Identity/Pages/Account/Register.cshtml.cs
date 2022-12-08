@@ -73,18 +73,27 @@ namespace ShippingHelper.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Choose you account type")]
             public int AccountType { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
             [Required]
             public string Address { get; set; }
 
             [Required]
+            [Phone]
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "Where do you live?")]
             public int CityId { get; set; }
 
             /// <summary>
