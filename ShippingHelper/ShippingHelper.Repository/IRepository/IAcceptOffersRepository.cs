@@ -9,6 +9,6 @@ namespace ShippingHelper.Repository.IRepository
 {
     public interface IAcceptOffersRepository : IBaseRepository<AcceptOffers>
     {
-
+        Task<string> GetUserIdByOfferId(Guid id);
     }
 }

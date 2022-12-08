@@ -143,7 +143,8 @@ namespace ShippingHelper.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     Address = Input.Address,
-                    CityId = Input.CityId
+                    CityId = Input.CityId,
+                    PhoneNumber = Input.PhoneNumber,
                 };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);

@@ -18,11 +18,9 @@ namespace ShippingHelper.Services.AcceptOffer
 
         public async Task<string> GetUserIdForAcceptOffer(Guid id)
         {
-            var data = await _unitOfWork.AcceptOffersRepository.GetById(id);
+            var data = await _unitOfWork.AcceptOffersRepository.GetUserIdByOfferId(id);
 
-            var userId = data.UserId;
-
-            return userId;
+            return data;
         }
     }
 }

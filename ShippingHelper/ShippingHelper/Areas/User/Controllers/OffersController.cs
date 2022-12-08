@@ -113,8 +113,6 @@ namespace ShippingHelper.Areas.User.Controllers
         // GET: User/Offers/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            string userId = await _offerService.GetUserIdForAcceptOffer(id.Value);
-
             if (id == null)
             {
                 return NotFound();
@@ -126,8 +124,9 @@ namespace ShippingHelper.Areas.User.Controllers
                 return NotFound();
             }
 
-            if (offers.Status == OfferStatus.Open)
+            if (offers.Status != OfferStatus.Open)
             {
+                var userId = await _offerService.GetUserIdForAcceptOffer(id.Value);
                 var user = await _userManager.FindByIdAsync(userId);
 
                 ViewBag.userId = userId;
