@@ -11,6 +11,8 @@ namespace ShippingHelper.Repository.IRepository
 
         Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId);
 
+        Task<IEnumerable<Offers>> GetOffersByShipperAndByStatus(string userId, OfferStatus status);
+
         Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId);
 
         Task<IEnumerable<Offers>> GetOffersByStatus(OfferStatus status);

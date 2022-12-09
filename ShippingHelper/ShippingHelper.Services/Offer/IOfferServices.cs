@@ -13,7 +13,7 @@ namespace ShippingHelper.Services.Offer
 
         Task<IEnumerable<Offers>> GetOffersByStatus(OfferStatus status);
 
-        Task<IEnumerable<Offers>> GetOffersByUserAndByStatus(string userId, OfferStatus status);
+        Task<IEnumerable<Offers>> GetOffersByShipperAndByStatus(string userId, OfferStatus status);
 
         Task<IEnumerable<Offers>> GetCreatedOFferByUserAndStatus(string userId, OfferStatus status);
 

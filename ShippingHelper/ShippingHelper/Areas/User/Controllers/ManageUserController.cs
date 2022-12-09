@@ -30,14 +30,13 @@ namespace ShippingHelper.Areas.User.Controllers
         // POST: ManageUserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditProfileAsync(string userID, [Bind("FirstName,LastName,Email,CityId,Address,PhoneNumber")] UpdateUserForm form)
+        public async Task<ActionResult> EditProfileAsync(string userID, [Bind("FirstName,LastName,Email,Address,PhoneNumber")] UpdateUserForm form)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
             user.FirstName = form.FirstName;
             user.LastName = form.LastName;
             user.Email = form.Email;
-            user.CityId = form.CityId;
             user.Address = form.Address;
             user.PhoneNumber = form.PhoneNumber;
 
@@ -46,7 +45,8 @@ namespace ShippingHelper.Areas.User.Controllers
             switch (res.Succeeded)
             {
                 case true:
-                    return RedirectToAction(nameof(Index), new { area = "User" });
+                    TempData["profile"] = "Successfully updated your profile!";
+                    return RedirectToAction("Index", "RedirectUser");
 
                 default:
                     TempData["Error"] = "something went wrong! Please try again!";

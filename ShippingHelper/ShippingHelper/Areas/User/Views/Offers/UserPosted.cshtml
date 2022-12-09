@@ -4,6 +4,16 @@
     ViewData["Title"] = "Your Posted Offers";
 }
 
+@if (TempData["profile"] is not null)
+{
+    <div class"alert alert-success">
+        @TempData["profile"]
+    </div>
+}
+
+<h3>@ViewData["Title"]</h3>
+<p>Showing all your posted offers</p>
+
 <p>
     <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i> New Offer</a>
 </p>
@@ -49,10 +59,11 @@
             <td>
                 @if(item.Status == ShippingHelper.Core.Models.OfferStatus.Open)
                 {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
                 }
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

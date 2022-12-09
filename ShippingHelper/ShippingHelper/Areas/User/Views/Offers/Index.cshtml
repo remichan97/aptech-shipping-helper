@@ -4,6 +4,17 @@
     ViewData["Title"] = "Available Offers";
 }
 
+@if(TempData["profile"] is not null)
+{
+    <div class"alert alert-success">
+        @TempData["profile"]
+    </div>
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<p>Showing all available offers</p>
+
 <table class="table">
     <thead>
         <tr>

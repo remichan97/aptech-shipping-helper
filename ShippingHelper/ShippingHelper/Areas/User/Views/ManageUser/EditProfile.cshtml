@@ -16,7 +16,7 @@
             <input type="hidden" value="@Model.Id" />
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" readonly />
+                <input asp-for="FirstName" class="form-control"/>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <br />
@@ -33,6 +33,12 @@
             </div>
             <br />
             <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" readonly/>
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -40,7 +46,7 @@
             <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="UserPosted" class="btn btn-black">Back to List</a>
+                <a asp-action="Index" asp-controller="RedirectUser" asp-area="default" class="btn btn-black">Cancel</a>
             </div>
         </form>
     </div>

@@ -48,14 +48,16 @@ namespace ShippingHelper.Repository.Repository
 
         public async Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.CityId == cityId).ToListAsync();
 
-        public async Task<IEnumerable<Offers>> GetOffersByStatus(OfferStatus status) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.Status == status).ToListAsync();
-
-        public async Task<IEnumerable<Offers>> GetOffersByUserAndByStatus(string userId, OfferStatus status)
+        public async Task<IEnumerable<Offers>> GetOffersByShipperAndByStatus(string userId, OfferStatus status)
         {
-            var data = from offer in _DbContext.Offers join accept in _DbContext.AcceptOffers on offer.Id equals accept.OfferId  where accept.UserId == userId && offer.Status == status select offer;
+            var data = (from offer in _DbContext.Offers join user in _DbContext.Users on offer.UserId equals user.Id join accept in _DbContext.AcceptOffers on offer.Id equals accept.OfferId where offer.Status == status && accept.UserId == userId select offer).Include(it => it.Users);
 
             return await data.ToListAsync();
         }
+
+        public async Task<IEnumerable<Offers>> GetOffersByStatus(OfferStatus status) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.Status == status).ToListAsync();
+
+        public async Task<IEnumerable<Offers>> GetOffersByUserAndByStatus(string userId, OfferStatus status) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.UserId == userId && it.Status == status).ToListAsync();
 
         public async Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId) => await _DbContext.Offers.Where(it => it.UserId == userId).ToListAsync();
     }

@@ -56,7 +56,7 @@ namespace ShippingHelper.Areas.User.Controllers
 
             var userId = user.Id;
 
-            var data = await _services.GetOffersByUserAndByStatus(userId, OfferStatus.Accepted);
+            var data = await _services.GetOffersByShipperAndByStatus(userId, OfferStatus.Accepted);
 
             return View(data);
 
@@ -69,7 +69,7 @@ namespace ShippingHelper.Areas.User.Controllers
 
             var userId = user.Id;
 
-            var data = await _services.GetOffersByUserAndByStatus(userId, OfferStatus.Finished);
+            var data = await _services.GetOffersByShipperAndByStatus(userId, OfferStatus.Finished);
 
             return View(data);
 
