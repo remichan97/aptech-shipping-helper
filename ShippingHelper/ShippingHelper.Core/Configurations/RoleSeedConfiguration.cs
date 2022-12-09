@@ -16,17 +16,20 @@ namespace ShippingHelper.Core.Configurations
                 new IdentityRole
                 {
                     Id = "40f71694-8d9d-4c9e-9698-4ebaad596253",
-                    Name = "Administrator"
+                    Name = "Administrator",
+                    NormalizedName = "ADMINISTRATOR"
                 },
                 new IdentityRole
                 {
                     Id = "433bef6f-10d9-44f3-9193-28a8bfa35c5c",
-                    Name = "Shipping Merchant"
+                    Name = "Shipping Merchant",
+                    NormalizedName = "SHIPPING MERCHANT"
                 },
                 new IdentityRole
                 {
                     Id = "d51059b9-ca3b-4fdd-ad1e-23b9e4956686",
-                    Name = "Shop Merchant"
+                    Name = "Shop Merchant",
+                    NormalizedName = "SHOP MERCHANT"
                 }
             );
 		}
