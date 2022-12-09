@@ -19,13 +19,6 @@ namespace ShippingHelper.Areas.Admin.Controllers
             this._userManager = userManager;
         }
 
-        // GET: UsersController
-        public IActionResult Index()
-        {
-            var data = _userManager.Users.ToList();
-            return View(data);
-        }
-
         public async Task<IActionResult> LockUserAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);

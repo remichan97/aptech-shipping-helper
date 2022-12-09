@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<ShippingHelper.Core.Models.ReportedMerchant>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Reported Merchant List";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<p>Below is the list of shipping merchants being reported</p>
+
 <table class="table">
     <thead>
         <tr>

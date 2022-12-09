@@ -28,21 +28,5 @@ namespace ShippingHelper.Areas.Admin.Controllers
             return View(data);
         }
 
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var reportedMerchant = await _services.
-            if (reportedMerchant == null)
-            {
-                return NotFound();
-            }
-
-            return View(reportedMerchant);
-        }
-
     }
 }

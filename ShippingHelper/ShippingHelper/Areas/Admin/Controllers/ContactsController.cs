@@ -45,5 +45,12 @@ namespace ShippingHelper.Areas.Admin.Controllers
             }
             return View(contacts);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendMail(IFormCollection formData)
+        {
+
+        }
     }
 }

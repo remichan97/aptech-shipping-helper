@@ -3,5 +3,121 @@
 *@
 @{
 }
-@model ShippingHelper.Core.Models.Users
+@model IEnumerable<ShippingHelper.Core.Models.Users>
 
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email Address
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Lockout Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @if(item.FirstName.Equals("System"))
+                    {
+                        <p></p>
+                    }
+                    else
+                    {
+                        @switch (item.LockoutEnabled)
+                        {
+                            case true:
+                                <p>Yes</p>
+                                break;
+                            default:
+                                <p>No</p>
+                                break;
+                        }
+                    }
+                </td>
+                <td>
+                    <a data-id="@item.Email" class="btn btn-primary resetBtn"><i class="fa-sharp fa-solid fa-rotate-right"></i></a>
+                    <button data-id="@item.Email" class="btn btn-danger deleteBtn" type="button"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="resetForm" asp-action="ResetPassword">
+    <input type="hidden" id="resetEmail" name="email" />
+</form>
+
+<form id="lockForm" asp-action="Delete">
+    <input type="hidden" id="lockEmail" name="email" />
+</form>
+
+@section Scripts {
+    <script>
+        $(function() {
+            $('.resetBtn').click(function (e) {
+                swal({
+                    title: "Reset Password",
+                    text: "You are about to reset the password for the selected user. Proceed?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMpde: true
+                }).then((confirm) => {
+                    if(confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#resetEmail').val(id);
+                        $('#resetForm').submit();
+                    }
+                });
+            });
+            $('.deleteBtn').click(function(e){
+                swal({
+                    title: "Confirmation",
+                    text: "Are you sure you want to ban the selected user?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMpde: true
+                }).then((confirm) => {
+                    if(confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#lockEmail').val(id);
+                        $('#lock').submit();
+                    }
+                });
+            });
+        });
+    </script>
+}
