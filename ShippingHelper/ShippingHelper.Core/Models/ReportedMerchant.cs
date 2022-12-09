@@ -23,6 +23,7 @@ namespace ShippingHelper.Core.Models
         public virtual Users Users { get; set; }
         [Required]
         public ReportTypes ReportType { get; set; }
+        public DateTime ReportTime { get; set; } = DateTime.Now;
         [Required]
         public string Description { get; set; }
     }

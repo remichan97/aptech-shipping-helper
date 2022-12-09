@@ -19,5 +19,6 @@ namespace ShippingHelper.Repository.Repository
 
         public async Task<IEnumerable<ReportedMerchant>> GetAllReports() => await _DbContext.ReportedMerchants.Include(it => it.Users).ToListAsync();
 
-        public async Task<ReportedMerchant> GetReportDetails(Guid id) => await _DbContext.ReportedMerchants.Include(it => it.Users).Where(it => it.Id == id).FirstOrDefaultAsync(); 
+        public async Task<ReportedMerchant> GetReportDetails(Guid id) => await _DbContext.ReportedMerchants.Include(it => it.Users).Where(it => it.Id == id).FirstOrDefaultAsync();
+    }
 }
