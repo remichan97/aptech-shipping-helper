@@ -54,6 +54,25 @@
             @Html.DisplayFor(model => model.PostedDate)
         </dd>
         <dt class="col-sm-2">
+            Package Details
+        </dt>
+        <dd class="col-sm-10">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="~/product/img/@Model.ProductOffers.Image" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.ProductOffers.Name</h5>
+                            <p class="card-text">@Model.ProductOffers.Description</p>
+                            <p class="card-text"><small class="text-muted">Quantity: @Model.ProductOffers.Quantity</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
         </dt>
         <dd class="col-sm-10">
@@ -63,7 +82,7 @@
             Posted by
         </dt>
         <dd class="col-sm-10">
-            @Model.Users.FirstName @Model.Users.LastName
+            <a href="tel:@Model.Users.PhoneNumber">@Model.Users.FirstName @Model.Users.LastName</a>
         </dd>
         @if (User.IsInRole(Roles.User) && Model.Status != ShippingHelper.Core.Models.OfferStatus.Open)
         {
@@ -132,7 +151,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Report Merchant</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -142,7 +161,7 @@
                     <div class="mb-3">
                         <label for="reason">Please tell us why you are reporting this merchant:</label>
                         <select id="reason" name="reason" class="form-select" required>
-                            <option value="" hidden selected>Please select an opption..</option>
+                            <option value="" hidden selected>Please select an option..</option>
                             <option value="1">Did not deliver item</option>
                             <option value="2">Missing or broken packages</option>
                             <option value="3">Bad behaviour</option>
@@ -151,7 +170,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="note">Please give us some details why you are reporting this merchant?</label>
-                        <textarea id="note" name="note" rows="2"></textarea>
+                        <textarea id="note" name="note" rows="2" class="form-control"></textarea>
                     </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Submit Report</button>

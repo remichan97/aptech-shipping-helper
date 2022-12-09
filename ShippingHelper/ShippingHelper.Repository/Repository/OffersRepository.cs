@@ -44,7 +44,7 @@ namespace ShippingHelper.Repository.Repository
 
         public async Task<IEnumerable<Offers>> GetCreatedOfferByStatus(string userId, OfferStatus status) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.Status == status && it.UserId == userId).ToListAsync();
 
-        public async Task<Offers> GetOfferById(Guid id) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.Id == id).FirstOrDefaultAsync();
+        public async Task<Offers> GetOfferById(Guid id) => await _DbContext.Offers.Include(it => it.ProductOffers).Where(it => it.Id == id).Include(it => it.Users).FirstOrDefaultAsync();
 
         public async Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.CityId == cityId).ToListAsync();
 
