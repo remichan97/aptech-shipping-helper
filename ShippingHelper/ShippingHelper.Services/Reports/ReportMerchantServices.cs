@@ -21,5 +21,7 @@ namespace ShippingHelper.Services.Reports
         }
 
         public async Task<IEnumerable<ReportedMerchant>> GetAll() => await _unitOfWork.ReportMerchantsRepository.GetAllReports();
+
+        public async Task<ReportedMerchant> GetReportDetails(Guid id) => await _unitOfWork.ReportMerchantsRepository.GetReportDetails(id);
     }
 }

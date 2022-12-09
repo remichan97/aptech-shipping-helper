@@ -28,7 +28,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Users.Id)
+                @item.Users.FirstName @item.Users.LastName
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReportType)
@@ -37,11 +37,35 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a data-id="@item.Users.Email" class="btn btn-danger deleteBtn" class="btn btn-danger"><i class="fa-solid fa-octagon-xmark"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<form id="banForm" asp-action="LockUserAsync" asp-controller="Users">
+    <input type="hidden" id="banEmail" name="email" />
+</form>
+
+                @section Scripts {
+    <script>
+            $('.deleteBtn').click(function(e){
+                swal({
+                    title: "Are you sure?",
+                    text: "You are about to ban the selected user! Proceed?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMpde: true
+                }).then((confirm) => {
+                    if(confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#banId').val(id);
+                        $('#deleteForm').submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

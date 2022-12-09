@@ -46,9 +46,37 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                <button data-id="@item.Id" class="btn btn-danger deleteBtn" type="button"><i class="fas fa-trash-alt"></i></button>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+<form id="deleteForm" asp-action="Delete">
+    <input type="hidden" id="offerId" name="Id" />
+</form>
+
+@section Scripts {
+    <script>
+            $('.deleteBtn').click(function(e){
+                swal({
+                    title: "Are you sure?",
+                    text: "Would you like to delete the selected offer listing?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMpde: true
+                }).then((confirm) => {
+                    if(confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#offerId').val(id);
+                        $('#deleteForm').submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

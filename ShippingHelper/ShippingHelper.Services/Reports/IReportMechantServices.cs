@@ -11,5 +11,7 @@ namespace ShippingHelper.Services.Reports
     {
         Task<IEnumerable<ReportedMerchant>> GetAll();
         Task Add(ReportedMerchant reported);
+
+        Task<ReportedMerchant> GetReportDetails(Guid id);
     }
 }
