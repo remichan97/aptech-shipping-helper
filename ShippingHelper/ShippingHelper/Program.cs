@@ -4,6 +4,7 @@ using ShippingHelper.Core.Data;
 using ShippingHelper.Core.Models;
 using ShippingHelper.Repository.Infrastructure;
 using ShippingHelper.Services.AcceptOffer;
+using ShippingHelper.Services.City;
 using ShippingHelper.Services.ContactsUs;
 using ShippingHelper.Services.Offer;
 using ShippingHelper.Services.Reports;
@@ -26,6 +27,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IContactServices, ContactServices>();
 builder.Services.AddScoped<IOfferServices, OfferServices>();
 builder.Services.AddScoped<IAcceptOfferService, AcceptOfferService>();
+builder.Services.AddScoped<ICitiesServices, CitiesServices>();
 builder.Services.AddScoped<IReportMechantServices, ReportMerchantServices>();
 
 builder.Services.AddControllersWithViews();

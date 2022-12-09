@@ -16,9 +16,6 @@
                 @Html.DisplayNameFor(model => model.EndAddress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
@@ -40,19 +37,16 @@
                 @Html.DisplayFor(modelItem => item.EndAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @item.Price VND
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PostedDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
-            </td
+            </td>
             <td>
-                <a asp-action="Detail" asp-route-id="@item.Id">Accept Offer</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }
