@@ -215,7 +215,7 @@ namespace ShippingHelper.Areas.User.Controllers
 
             await _services.AcceptOffer(id.Value, user.Id);
             TempData["accept"] = "You have accepted this offer!";
-            return RedirectToAction(nameof(Details));
+            return RedirectToAction(nameof(Details), new {id = id.Value});
         }
 
         // POST: User/Offers/Edit/5

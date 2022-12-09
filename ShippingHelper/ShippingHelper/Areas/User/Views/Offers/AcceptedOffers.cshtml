@@ -12,19 +12,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StartAddress)
+                Start from
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note)
+                Destination
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostedDate)
+                Posted Date
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -44,10 +41,7 @@
                 @Html.DisplayFor(modelItem => item.EndAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @item.Price VND
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PostedDate)
@@ -56,7 +50,7 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Users.Id)
+                @(item.Users.FirstName + item.Users.LastName)
             </td>
         </tr>
 }

@@ -12,6 +12,7 @@ namespace ShippingHelper.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly UserManager<Users> _userManager;
+        private readonly PasswordHasher<Users> _passwordHasher = new PasswordHasher<Users>();
 
         public UsersController(UserManager<Users> userManager)
         {
@@ -19,52 +20,36 @@ namespace ShippingHelper.Areas.Admin.Controllers
         }
 
         // GET: UsersController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             var data = _userManager.Users.ToList();
             return View(data);
         }
 
-        // GET: UsersController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> LockUserAsync(string email)
         {
-            return View();
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is null) return NotFound();
+
+            await _userManager.SetLockoutEnabledAsync(user, true);
+
+            await _userManager.SetLockoutEndDateAsync(user, DateTime.Now.AddDays(7));
+
+            TempData["message"] = "User has been banned from the system!";
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: UsersController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> ResetUserPassword(string email)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var user = await _userManager.FindByIdAsync(email);
 
-        // GET: UsersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-        // POST: UsersController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            await _userManager.ResetPasswordAsync(user, token, "ShipLink@123");
+
+            TempData["message"] = "Password Reset completed!";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

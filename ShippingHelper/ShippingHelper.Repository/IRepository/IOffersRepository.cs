@@ -7,6 +7,8 @@ namespace ShippingHelper.Repository.IRepository
     {
         Task<IEnumerable<Offers>> GetAllAsync();
 
+        Task<Offers> GetOfferById(Guid id);
+
         Task<IEnumerable<Offers>> GetOFfersCreatedByUser(string userId);
 
         Task<IEnumerable<Offers>> GetOFfersByCityId(int cityId);

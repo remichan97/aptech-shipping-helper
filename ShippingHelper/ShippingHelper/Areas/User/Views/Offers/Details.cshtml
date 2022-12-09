@@ -45,7 +45,7 @@
             @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            @Model.Price VND
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PostedDate)
@@ -63,7 +63,7 @@
             Posted by
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Users.Id)
+            @Model.Users.FirstName @Model.Users.LastName
         </dd>
         @if (User.IsInRole(Roles.User) && Model.Status != ShippingHelper.Core.Models.OfferStatus.Open)
         {
@@ -120,8 +120,8 @@
                 Woould you like to accept this offer?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <a asp-action="AcceptOffer" asp-route-id="@Model?.Id" class="btn btn-primary">Yes! Accept the offer</a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                <a asp-action="AcceptOffer" asp-route-id="@Model?.Id" class="btn btn-secondary">Yes! Accept the offer</a>
             </div>
         </div>
     </div>
