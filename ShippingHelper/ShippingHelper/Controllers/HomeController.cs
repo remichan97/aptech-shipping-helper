@@ -41,7 +41,7 @@ namespace ShippingHelper.Controllers
 				contacts.Id = Guid.NewGuid();
 				await _services.SendMessage(contacts);
 				TempData["Message"] = "Thank you! Your message has been sent! We'll reach out to you soon.";
-				return View();
+				return RedirectToAction("ContactUs", "Home", new {area = "default"});
 			}
 			return View(contacts);
 		}

@@ -6,6 +6,13 @@
 
 <h1>All messages</h1>
 
+@if(TempData["email"] is not null)
+{
+    <div class="alert alert-warning">
+        @TempData["email"]
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -40,41 +47,10 @@
                 @Html.DisplayFor(modelItem => item.Message)
             </td>
             <td>
-                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@item.Email"><i class="fa-solid fa-reply"></i></a>
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Reply</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form asp-action="ChangePassword" asp-controller="ManageUser">
-                                        <div class="mb-3">
-                                            <label for="current" class="col-form-label">To</label>
-                                            <input type="email" id="email" name="email" class="form-control" value="@item.Email" readonly>
-                                        </div>
-                                        <br />
-                                        <div class="mb-3">
-                                            <label for="new" class="col-form-label">Subject</label>
-                                            <input type="text" id="subject" name="subject" class="form-control" required>
-                                        </div>
-                                        <br />
-                                        <div class="mb-3">
-                                            <label for="verify" class="col-form-label">Your message:</label>
-                                            <textarea rows="3" id="message" name="message" class="form-control" required>
-                                        </div>
-                                        <br />
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Send Message</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <a asp-action="ReplyMessage" class="btn btn-primary" asp-route-id="@item.Id"><i class="fa-solid fa-reply"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+

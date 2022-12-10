@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentEmail.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,10 +18,12 @@ namespace ShippingHelper.Areas.Admin.Controllers
     public class ContactsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IFluentEmail _email;
 
-        public ContactsController(AppDbContext context)
+        public ContactsController(AppDbContext context, IFluentEmail email)
         {
             _context = context;
+            this._email = email;
         }
 
         // GET: Admin/Contacts
@@ -29,28 +32,39 @@ namespace ShippingHelper.Areas.Admin.Controllers
               return View(await _context.Contacts.ToListAsync());
         }
 
-        // POST: Admin/Contacts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FullName,Email,Subjects,Message")] Contacts contacts)
+        public async Task<IActionResult> ReplyMessage(Guid? id)
         {
-            if (ModelState.IsValid)
-            {
-                contacts.Id = Guid.NewGuid();
-                _context.Add(contacts);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(contacts);
+            if (id is null) return NotFound();
+
+            var data = await _context.Contacts.FindAsync(id.Value);
+
+            if (data is null) return NotFound();
+
+            ViewBag.Email = data.Email;
+
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendMail(IFormCollection formData)
         {
+            string to = formData["Email"];
+            string subject = formData["Subjects"];
+            string message = formData["Message"];
 
+            var sent = await _email.To(to).Subject(subject).Body(message).SendAsync();
+            
+            if (sent.Successful)
+            {
+                TempData["email"] = "Your resonse has been sent!";
+            }
+            else
+            {
+                TempData["email"] = "Something went wrong. Please try again!";
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -30,6 +30,8 @@ builder.Services.AddScoped<IAcceptOfferService, AcceptOfferService>();
 builder.Services.AddScoped<ICitiesServices, CitiesServices>();
 builder.Services.AddScoped<IReportMechantServices, ReportMerchantServices>();
 
+builder.Services.AddFluentEmail("noreply@shiplink.com").AddSmtpSender("localhost", 25);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -66,9 +68,7 @@ app.MapAreaControllerRoute(
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 app.Run();

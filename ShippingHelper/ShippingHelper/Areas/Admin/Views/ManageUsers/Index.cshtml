@@ -79,7 +79,7 @@
     <input type="hidden" id="resetEmail" name="email" />
 </form>
 
-<form id="lockForm" asp-action="Delete">
+<form id="lockForm" asp-action="LockUser">
     <input type="hidden" id="lockEmail" name="email" />
 </form>
 
@@ -114,7 +114,7 @@
                         var btn = $(this);
                         var id = btn.data("id");
                         $('#lockEmail').val(id);
-                        $('#lock').submit();
+                        $('#lockForm').submit();
                     }
                 });
             });

@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a asp-action="Index" class="nav-item nav-link">Home</a>
-                <a asp-action="ContactUs" class="nav-item nav-link">Contact</a>
+                <a asp-action="ContactUs" asp-controller="Home" asp-area="default" class="nav-item nav-link">Contact</a>
                 @if(!signInManager.IsSignedIn(User))
                 {
                     <a asp-area="Identity" asp-page="/Account/Login" class="nav-item nav-link">Sign In/Join Us</a>

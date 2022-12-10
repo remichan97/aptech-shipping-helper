@@ -27,8 +27,11 @@
                 <h1 class="mb-4">Contact For Any Query</h1>
                 <p class="mb-4">Have a question? Got a suggestion for us? Please don't hesistate to reach out to us using the form below!</p>
                 <div class="bg-light p-4">
-                    <form asp-action="ContactUs">
-                        <div class="alert alert-primary" role="alert">@TempData["Message"]</div>
+                    <form asp-action="ContactUs" asp-controller="Home" asp-area="default">
+                        @if(TempData["Message"] is not null)
+                        {
+                            <div class="alert alert-primary" role="alert">@TempData["Message"]</div>
+                        }
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">

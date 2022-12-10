@@ -165,64 +165,31 @@
                             
                         <!-- End User Profile-->
 
-                        <li class="p-15 m-t-10"><a asp-controller="ManageUser" asp-action="EditProfile" class="btn btn-block create-btn text-white no-block d-flex align-items-center"><i class="fas fa-user"></i> <span class="hide-menu m-l-5">Edit Profile</span> </a></li>
+                        <li class="p-15 m-t-10"><a asp-controller="ManageUsers" asp-action="EditProfile" class="btn btn-block create-btn text-white no-block d-flex align-items-center"><i class="fas fa-user"></i> <span class="hide-menu m-l-5">Edit Profile</span> </a></li>
                         <li class="p-15 m-t-10"><a href="#" class="btn btn-block create-btn text-white no-block d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-key"></i> <span class="hide-menu m-l-5">Change Password</span> </a></li>
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Change password</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form asp-action="ChangePassword" asp-controller="ManageUser">
-                                            <div class="mb-3">
-                                                <label for="current" class="col-form-label">Current Password</label>
-                                                <input type="password" id="current" name="current" class="form-control" required>
-                                            </div>
-                                            <br />
-                                            <div class="mb-3">
-                                                <label for="new" class="col-form-label">New Password:</label>
-                                                <input type="password" id="new" name="new" class="form-control" required>
-                                            </div>
-                                            <br />
-                                            <div class="mb-3">
-                                                <label for="verify" class="col-form-label">Retype your password:</label>
-                                                <input type="password" id="verify" name="verify" class="form-control" required>
-                                                <span class="error"></span>
-                                            </div>
-                                            <br />
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" onclick="return check();">Change Password</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- User Profile-->
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Offers" asp-action="Index">
                                 <span><i class="fa-solid fa-list"></i> All Offers</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Latest">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Offers" asp-action="CompletedOffer">
                                 <span><i class="fa-solid fa-file-circle-plus"></i> Completed Offers</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="MostViewed">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="ManageUsers" asp-action="Index">
                                 <span><i class="fa-solid fa-eye"></i> Manage Users</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Interesting">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="ReportedMerchants" asp-action="Index">
                                 <span><i class="fa-solid fa-fire"></i> Reported Users</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Published">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Contacts" asp-action="Index">
                                 <span><i class="fa-solid fa-square-check"></i> View Messages</span>
                             </a>
                         </li>
@@ -239,11 +206,45 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
+        <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Change password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form asp-action="ChangePassword" asp-controller="ManageUser">
+                            <div class="mb-3">
+                                <label for="current" class="col-form-label">Current Password</label>
+                                <input type="password" id="current" name="current" class="form-control" required>
+                            </div>
+                            <br />
+                            <div class="mb-3">
+                                <label for="new" class="col-form-label">New Password:</label>
+                                <input type="password" id="new" name="new" class="form-control" required>
+                            </div>
+                            <br />
+                            <div class="mb-3">
+                                <label for="verify" class="col-form-label">Retype your password:</label>
+                                <input type="password" id="verify" name="verify" class="form-control" required>
+                                <span class="error"></span>
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="return check();">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     @RenderBody()
                 </div>
+
             </div>
             <footer class="footer text-center">
                 &copy; @DateTime.Now.Year - ShipLink Management Page | Themed by <a href="https://www.wrappixel.com">WrapPixel</a>

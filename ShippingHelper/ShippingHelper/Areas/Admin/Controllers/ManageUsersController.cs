@@ -84,5 +84,18 @@ namespace ShippingHelper.Areas.Admin.Controllers
             }
         }
 
+        public async Task<IActionResult> LockUserAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user is null) return NotFound();
+
+            await _userManager.SetLockoutEnabledAsync(user, true);
+
+            await _userManager.SetLockoutEndDateAsync(user, DateTime.Now.AddDays(7));
+
+            TempData["message"] = "User has been banned from the system!";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

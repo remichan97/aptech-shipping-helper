@@ -29,6 +29,12 @@ namespace ShippingHelper.Areas.Admin.Controllers
             return View(data);
         }
 
+        public async Task<IActionResult> CompletedOffer()
+        {
+            var data = await _services.GetOffersByStatus(OfferStatus.Finished);
+            return View(data);
+        }
+
         // GET: Admin/Offers/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {

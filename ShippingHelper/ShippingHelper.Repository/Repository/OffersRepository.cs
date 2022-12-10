@@ -40,7 +40,7 @@ namespace ShippingHelper.Repository.Repository
             _DbContext.Offers.Update(offer);
         }
 
-        public async Task<IEnumerable<Offers>> GetAllAsync() => await _DbContext.Offers.Include(it => it.Users).ToListAsync();
+        public async Task<IEnumerable<Offers>> GetAllAsync() => await _DbContext.Offers.Include(it => it.Users).ThenInclude(it  => it.Cities).ToListAsync();
 
         public async Task<IEnumerable<Offers>> GetCreatedOfferByStatus(string userId, OfferStatus status) => await _DbContext.Offers.Include(it => it.Users).Where(it => it.Status == status && it.UserId == userId).ToListAsync();
 

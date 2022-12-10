@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Reply";
+}
+
+<h3>Reply Message</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="SendMail">
+            <div class="form-group">
+                <label for="Email" class="col-form-label">To:</label>
+                <input type="email" class="form-control" id="Email" name="Email" value="@ViewBag.Email" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="Subjects" class="col-form-label"></label>
+                <input type="text" id="Subjects" name="Subjects" class="form-control" required/>
+            </div>
+            <div class="form-group">
+                <label for="Message" class="col-form-label"></label>
+                <textarea id="Message" name="Message" class="form-control" required/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send Message" class="btn btn-primary"/>
+                <a asp-action="Index" class="btn btn-dark">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
